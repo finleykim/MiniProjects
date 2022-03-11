@@ -8,10 +8,15 @@
 import UIKit
 
 class SeguePushViewController: UIViewController {
-
+    @IBOutlet weak var nameLabel: UILabel!
+    var name: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if let name = name{
+        self.nameLabel.text = name
+            self.nameLabel.sizeToFit()
+        }
 
     }
     
