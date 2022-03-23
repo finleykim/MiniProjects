@@ -10,9 +10,11 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    var tasks = [Task]() 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.dataSource = self
         // Do any additional setup after loading the view.
     }
 
@@ -21,10 +23,16 @@ class ViewController: UIViewController {
     
     @IBAction func tapAddButton(_ sender: UIBarButtonItem) {
         //알럿을 표시
-        let alert = UIAlertController(title: "할 일 등록", message: "할 일을 입력해주세요", preferredStyle: .alert)
+        let alert = UIAlertController(title: "할 일 등록", message: nil , preferredStyle: .alert)
         //알럿버튼을 눌렀을 때 파라미터에 정의된 클로저함수가 호출되기 때문에 사용자가 알럿버튼을 눌렀을 때 실행해야할 행동을 handler 클로저에 정의
-        let registerButton = UIAlertAction(title: "등록", style: .default, handler: {_ in
-            
+                                                                                //[weak self]강한순환참조를 방지하기위해 weak 키워드를 사용해 캡쳐목록을 작성하는 작업
+        let registerButton = UIAlertAction(title: "등록", style: .default, handler: {[weak self] _ in
+            //등록버튼을 눌렀을 때 텍스트필드의 텍스트를 가져올 수 있게 만드는 클로저를 registerButton handler 클로저에 입력
+            guard let title = alert.textFields?[0].text else { return }//0번째 인덱스로 배열에 접근해서 텍스트필드에 접근되도록하고, 텍스트 프로퍼티를 이용해서 텍스트필드에 입력된 값이 무엇인지 가져오도록 코드작성하였음. & textField가 옵셔널이므로 guard구문을 사용해 옵셔널 바인딩으로 title프로퍼티 생성하여 작성한코드alert.textFields?[0].text를 할당
+            //debugPrint("\(alert.textFields?[0].text)") 제대로 작동하는지 출력해서 확인해볼 수 있음
+            let task = Task(title: title, done: false)
+            self?.tasks.append(task)
+            self?.tableView.reloadData()
         })
        //취소버튼생성
         let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil) //취소버튼을 누르면 별다른 액션을 취하지 않을 것이기 떄문에 handler : nil
@@ -43,3 +51,23 @@ class ViewController: UIViewController {
 }
 
 
+extension ViewController: UITableViewDataSource{
+    //numberOfRowsInSection : 표시할 행의 갯수를 묻는 함수
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.tasks.count
+    }
+    
+    //특정 섹션의 n번째 row를 그리는데 필요한 셀을 반환하는 함수
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        //dequeueReusableCell: 지정된 재사용 식별자(withIdentifier파라미터)에대한 재사용 가능한 테이블뷰 셀 객체를 반환하고 이를 테이블뷰에 추가하는 역할을 하는 메서드. 메모리낭비 방지
+        //for: indexPath : 필요에의해 재사용을 계속한다는 의미
+      
+        //배열에 저장되어있는 할일 요소들을 가져온다
+        let task = self.tasks[indexPath.row]
+        //cellForRawAt의 파라미터인 indexPath는 tableview에서 cell위치를 나타내는 인덱스이다. 섹션과 로우 속성으로 지정되어있다.
+        //indexPath에서 섹션이 0이고 로우도 0이라면 가장위에 보이는 셀의 위치를 의미하는데, numberOfRowsInSection에 tasks의 갯수만큼 row가 있다고 정의했으므로,indexPath.row는 0 ~ tasks의 갯수를 의미한다.
+        cell.textLabel?.text = task.title //cell의 텍스트라벨 텍스트에 task.title을 보여준다
+        return cell
+    }
+}
