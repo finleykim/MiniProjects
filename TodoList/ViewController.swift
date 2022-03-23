@@ -10,12 +10,16 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    var tasks = [Task]() 
+    var tasks = [Task](){
+    didSet{
+        self.saveTasks() //tasks배열에 할 일이 추가될 때 마다 userDefaults에 저장된다.
+    }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self
-        // Do any additional setup after loading the view.
+        self.loadTasks()
     }
 
     @IBAction func tapEditButton(_ sender: UIBarButtonItem) {
@@ -45,10 +49,44 @@ class ViewController: UIViewController {
         alert.addTextField(configurationHandler: {textField in
             textField.placeholder = "할 일을 입력해주세요 "})
         self.present(alert, animated: true, completion: nil)
-        
+    }
     
+    
+    func saveTasks(){
+        //할 일들(tasks 배열)을 Dictionary형태로 userDefaults에 저장한다
+        let data = self.tasks.map{
+            [
+                "title" : $0.title,
+                "done" : $0.done
+            ]
+        }
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(data, forKey: "tasks")
+    }
+    
+    func loadTasks(){       //UserDefaults에 접근
+        let userDefaults = UserDefaults.standard
+        //UserDefaults에 저장된 할일들을 불러오기  .object : 저장된 데이터를 로드하는 키워드
+        guard let data = userDefaults.object(forKey: "tasks") as? [[String: Any]] else { return }
+        // ㄴ forkey파라미터에는 데이터를 저장할 때 설정한 키 값을 입력한다
+        // ㄴ object메서드는 Any타입으로 반환되기때문에 Dictionary배열형태로 타입캐스팅한다
+        // ㄴ 타입캐스팅에 실패하면 nil값이 반환될 수 있기때문에 guard문으로 작성한다.
+    
+        self.tasks = data.compactMap{
+            // ㄴ 데이터를 배열에 저장한다  ㄴ Task타입의 배열이 되도록 매핑
+            guard let title = $0["title"] as? String else { return nil }
+                            // ㄴ 축약인자로 Dictionary에 접근
+                                            // ㄴ 타입캐스팅을 사용해 String 타입으로 변환
+            
+            guard let done = $0["done"] as? Bool else { return nil }
+            return Task(title: title, done: done) // Task타입으로 인스턴스화하는 반환
+        }
+       
     }
 }
+
+
+
 
 
 extension ViewController: UITableViewDataSource{
