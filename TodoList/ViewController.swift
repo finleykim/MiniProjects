@@ -10,6 +10,8 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var editButton: UIBarButtonItem!
+    var doneButton: UIBarButtonItem?
     var tasks = [Task](){
     didSet{
         self.saveTasks() //tasks배열에 할 일이 추가될 때 마다 userDefaults에 저장된다.
@@ -18,11 +20,21 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTap))
         self.tableView.dataSource = self
+        self.tableView.delegate = self
         self.loadTasks()
+    }
+    
+    @objc func doneButtonTap(){
+        self.navigationItem.leftBarButtonItem = self.editButton
+        self.tableView.setEditing(false, animated: true)
     }
 
     @IBAction func tapEditButton(_ sender: UIBarButtonItem) {
+        guard !self.tasks.isEmpty else { return }
+        self.navigationItem.leftBarButtonItem = self.doneButton
+        self.tableView.setEditing(true, animated: true)
     }
     
     @IBAction func tapAddButton(_ sender: UIBarButtonItem) {
@@ -106,6 +118,44 @@ extension ViewController: UITableViewDataSource{
         //cellForRawAt의 파라미터인 indexPath는 tableview에서 cell위치를 나타내는 인덱스이다. 섹션과 로우 속성으로 지정되어있다.
         //indexPath에서 섹션이 0이고 로우도 0이라면 가장위에 보이는 셀의 위치를 의미하는데, numberOfRowsInSection에 tasks의 갯수만큼 row가 있다고 정의했으므로,indexPath.row는 0 ~ tasks의 갯수를 의미한다.
         cell.textLabel?.text = task.title //cell의 텍스트라벨 텍스트에 task.title을 보여준다
+        
+        if task.done {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+            
+        }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        self.tasks.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        if self.tasks.isEmpty{
+            self.doneButtonTap()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        var tasks = self.tasks //tasks 불러오기
+        let task = tasks[sourceIndexPath.row] //배열의 요소에 접근
+        tasks.remove(at: sourceIndexPath.row) //원래있던 그 자리에 있던 셀은 삭제
+        tasks.insert(task, at: destinationIndexPath.row) //이동한 위치 넘겨주기
+        self.tasks = tasks //재정렬된 tasks를 tasks프로퍼티에 저장
+    }
+    
+}
+
+//UITableViewDelegate 프로토콜 채택
+extension ViewController: UITableViewDelegate{
+    //cell을 선택했을 때 어떤 cell이 선택되었는지 알려주는 메서드
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+ //아래 메서드 안에서 tasks배열의 요소에 접근해서 tasks인스턴스에 done프로퍼티가 true이면 false, false면 true가 되도록 변경
+        var task = self.tasks[indexPath.row] //첫번째 셀을 선택하면 indexPath.row 는 0이되고, 두번째셀을 선택하면 indexPath.row 가 1이된다
+        task.done = !task.done //불리언 값이 반대가 되도록 세팅
+        self.tasks[indexPath.row] = task  //원래 배열의 요소에 task값을 덮어씌우기
+        self.tableView.reloadRows(at: [indexPath], with: .automatic)//선택된 셀만 리로드하도록 세팅
+                                    // ㄴ 섹션과 행의 위치정보를 담은 IndexPath구조체의 배열을 넘겨주는데, 대괄호를 사용해 선택된 셀의 정보만 넘겨준다
+                                                        // ㄴ 행이 업데이트될 때 어떤 에니매이션을 보여줄지 지정하는 타입 .automatic은 시스템이 알아서 적절한 애니메이션을 보여준다
+}
 }
