@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum DiaryEditerMode{
+    case new
+    case edit(IndexPath, Diary) //IndexPath, Diary객체를 전달받을 수 있도록 정의
+}
+
 
 //델리게이트를 이용해 일기장리스트화면에 작성된 일기를 전달
 protocol WriteDiaryViewDelegate: AnyObject{
@@ -27,15 +32,39 @@ class WriteDiaryViewController: UIViewController {
     //데이트피커에서 선택된 데이트를 저장하는프로퍼티
     private var diaryDate: Date?
     weak var delegate: WriteDiaryViewDelegate?
+    //DiaryEditerMode타입을 저장하는 프로퍼티 선언
+    var diaryEditorMode: DiaryEditerMode = .new
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureContentsTextView()
         self.configureDatePicker()
         self.configureInputField()
-        //9. 빈항목있을 경우 등록버튼 비활성화하기 - 처음엔 아무 내용도 적혀있지 않을 것이기 때문에 등록버튼 비활성화를 기본으로한다
+        self.configureEditMode()
         self.confirmButton.isEnabled = false
     }
+    
+    private func configureEditMode(){
+        switch self.diaryEditorMode{
+        case let .edit(_, diary):
+            self.titleTextField.text = diary.title
+            self.contentsTextView.text = diary.contents
+            self.dateTextField.text = self.dateToString(date: diary.date)
+            self.diaryDate = diary.date
+            self.confirmButton.title = "수정"
+            
+        default:
+            break
+        }
+    }
+    
+    private func dateToString(date: Date) -> String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yy년 MM월 dd일(EEEEE)"
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter.string(from: date)
+    }
+    
     
     //4. 내용텍스트필드 테두리생성을 위한 함수작성
     private func configureContentsTextView(){
@@ -79,8 +108,25 @@ class WriteDiaryViewController: UIViewController {
         guard let date = self.diaryDate else { return }
         let diary = Diary(title: title, contents: contents, date: date, isStar: false)
                    // ㄴ 구조체                                             // ㄴ 즐겨찾기된 상태가 아니므로 false를 넘겨준다
-        self.delegate?.didSelectReigster(diary: diary) //일기 전달받을 메서드 호출
-        self.navigationController?.popViewController(animated: true)  // 전화면으로 이동
+        
+        switch self.diaryEditorMode{
+        case .new:
+            self.delegate?.didSelectReigster(diary: diary) //일기 전달받을 메서드 호출
+            
+            
+        case let .edit(indexPath, _):
+            NotificationCenter.default.post(
+                name: NSNotification.Name("editDiary"),
+                object: diary,
+                userInfo: [
+                "indexPath.row": indexPath.row
+            ])
+            
+        }
+        
+        
+        
+        self.navigationController?.popViewController(animated: true)  //pop뷰로 전화면으로 이동
     }
     
     //7. 일기장작성화면 - 날짜선택 피커뷰 생성을 위한 코드 ( 6번의 함수 내 action파라매터 #selector에 들어갈 objc함수 )
