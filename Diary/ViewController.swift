@@ -11,12 +11,21 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var diaryList = [Diary]()
+    private var diaryList = [Diary](){
+        //다이어리리스트배열에 변경이 일어날 때 마다(추가,삭제 등) UserDefaults에 저장
+        didSet{
+            self.saveDiaryLiest()
+            
+        }
+        
+    }
+  
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureCollectionView()
+        self.loadDiaryList()
     }
 
     
@@ -34,6 +43,47 @@ class ViewController: UIViewController {
             wireDiaryViewController.delegate = self
         }
     }
+    
+    //saveDiaryLiest라는 메소드를 생성하여
+    private func saveDiaryLiest(){
+        //.map키워드를 이용하여 diaryList구조체의 값을 딕셔너리형태로 저장한다
+        let date = self.diaryList.map{
+                       // ㄴ Diary구조체를 할당받은 프로퍼티
+            [
+                "title" : $0.title,
+                "contents" : $0.contents,
+                "date" : $0.date,
+                "isStar" : $0.isStar
+            ]
+        }
+        //userDefaults에 접근할 수 있도록한다
+        let userDefaults = UserDefaults.standard
+        //userDefults의 set메서드호출
+        userDefaults.set(date, forKey: "diaryList")
+                        // ㄴ 위에 설정해둔 일기구조체가 저장되어있는 프로퍼티
+    }
+    
+    
+    private func loadDiaryList(){
+        let userDefaults = UserDefaults.standard
+        guard let data = userDefaults.object(forKey: "diaryList") as? [[String: Any]] else { return }
+                                              // ㄴ object는 Any타입으로 리턴되기때문에 dictionary타입으로 타입캐스팅하고, 타입캐스팅에 실패할 경우를 대비해 guard문으로 작성한다.
+        //불러온 데이터를 다이어리 리스트 배열에 넣어준다
+        self.diaryList = data.compactMap{
+            guard let title = $0["title"] as? String else { return nil }
+            guard let contents = $0["contents"] as? String else { return nil }
+            guard let date = $0["date"] as? Date else { return nil }
+            guard let isStar = $0["isStar"] as? Bool else { return nil }
+            return Diary(title: title, contents: contents, date: date, isStar: isStar)
+        }
+        
+        self.diaryList = self.diaryList.sorted(by: {
+            $0.date.compare($1.date) == .orderedDescending
+        })
+         
+    }
+    
+    
     
     //CollectionView(다이어리리스트)에 날짜를 문자열로 넘겨주기 위한 포메터
     private func dateToString(date: Date) -> String{
@@ -58,6 +108,11 @@ extension ViewController : UICollectionViewDataSource{
         cell.titleLabel.text = diary.title
         //날짜는 피커뷰선택으로 표시되기 때문에 이를 DateFormatter를 이용해 문자열로 만들어주어야한다.
         cell.dateLabel.text = self.dateToString(date: diary.date)
+        
+        
+    
+        
+        
         return cell
     }
 }
@@ -72,13 +127,43 @@ extension ViewController: UICollectionViewDelegateFlowLayout{
     }
 }
 
-
+extension ViewController: UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let viewController = self.storyboard?.instantiateViewController(identifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
+        let diary = self.diaryList[indexPath.row]
+        viewController.diary = diary
+        viewController.indexPath = indexPath
+        viewController.delegate = self
+        self.navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+}
 
 extension ViewController : WriteDiaryViewDelegate{
     func didSelectReigster(diary: Diary) {
         //일기리스트(diaryList프로퍼티)에 diary(작성한일기)를 추가한다
         self.diaryList.append(diary)
+        self.diaryList = self.diaryList.sorted(by: {
+            $0.date.compare($1.date) == .orderedDescending
+        })
         //일기를 추가할 때 마다 리스트에 리로드시킨다
         self.collectionView.reloadData()
     }
+    
 }
+
+
+extension ViewController: DiaryDetailViewDelegate{
+    func didSelectDelete(indexPath: IndexPath){
+        self.diaryList.remove(at: indexPath.row)
+        self.collectionView.deleteItems(at: [indexPath])
+    }
+}
+
+
+
+
+
+
+
+

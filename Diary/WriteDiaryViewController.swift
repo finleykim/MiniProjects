@@ -78,9 +78,9 @@ class WriteDiaryViewController: UIViewController {
         guard let contents = self.contentsTextView.text else { return }
         guard let date = self.diaryDate else { return }
         let diary = Diary(title: title, contents: contents, date: date, isStar: false)
-                                                                        // ㄴ 즐겨찾기된 상태가 아니므로 false를 넘겨준다
-        self.delegate?.didSelectReigster(diary: diary)
-        self.navigationController?.popViewController(animated: true)
+                   // ㄴ 구조체                                             // ㄴ 즐겨찾기된 상태가 아니므로 false를 넘겨준다
+        self.delegate?.didSelectReigster(diary: diary) //일기 전달받을 메서드 호출
+        self.navigationController?.popViewController(animated: true)  // 전화면으로 이동
     }
     
     //7. 일기장작성화면 - 날짜선택 피커뷰 생성을 위한 코드 ( 6번의 함수 내 action파라매터 #selector에 들어갈 objc함수 )
