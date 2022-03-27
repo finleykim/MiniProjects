@@ -110,11 +110,12 @@ class WriteDiaryViewController: UIViewController {
                    // ㄴ 구조체                                             // ㄴ 즐겨찾기된 상태가 아니므로 false를 넘겨준다
         
         switch self.diaryEditorMode{
-        case .new:
+            //등록되었을때와 수정되었을 때를 나누어 각각의 동작을 결정
+        case .new: //일기가 등록되었을 때
             self.delegate?.didSelectReigster(diary: diary) //일기 전달받을 메서드 호출
             
             
-        case let .edit(indexPath, _):
+        case let .edit(indexPath, _): //일기가 수정되었을 때
             NotificationCenter.default.post(
                 name: NSNotification.Name("editDiary"),
                 object: diary,
