@@ -149,8 +149,8 @@ class WriteDiaryViewController: UIViewController {
     
     
     @objc private func titleTextFieldDidChange(_ textField: UITextField){
-        self.validateInputField()
-    }
+            self.validateInputField()
+        }
     
     @objc private func dateTextFieldDidChange(_ textField: UITextField){
         self.validateInputField()
@@ -164,9 +164,9 @@ class WriteDiaryViewController: UIViewController {
     
     //등록버튼 활성화를 판단할 수 있게하는 메서드. 아래 WriteDiaryViewController익스텐션에 추가할 것
     private func validateInputField(){
-        self.confirmButton.isEnabled = !(self.titleTextField.text?.isEmpty ?? true) &&
-        !(self.dateTextField.text?.isEmpty ?? true) && !self.contentsTextView.text.isEmpty
-    }
+            self.confirmButton.isEnabled = !(self.titleTextField.text?.isEmpty ?? true) &&
+            !(self.dateTextField.text?.isEmpty ?? true) && !self.contentsTextView.text.isEmpty
+        }
 }
 
 extension WriteDiaryViewController: UITextViewDelegate{
@@ -175,3 +175,6 @@ extension WriteDiaryViewController: UITextViewDelegate{
         self.validateInputField()
     }
 }
+
+
+

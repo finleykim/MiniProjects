@@ -9,6 +9,7 @@ import UIKit
 
 protocol DiaryDetailViewDelegate: AnyObject{
     func didSelectDelete(indexPath: IndexPath)
+    func didSelectStar(indexPath: IndexPath, isStar: Bool)
 }
 
 class DiaryDetailViewController: UIViewController {
@@ -17,6 +18,7 @@ class DiaryDetailViewController: UIViewController {
     @IBOutlet weak var contentsTextView: UITextView!
     @IBOutlet weak var dateLabel: UILabel!
     weak var delegate: DiaryDetailViewDelegate?
+    var starButton: UIBarButtonItem?
     
     //일기장디테일데이터를 전달받을 프로퍼티
     var diary: Diary?
@@ -35,6 +37,10 @@ class DiaryDetailViewController: UIViewController {
         self.titleLabel.text = diary.title
         self.contentsTextView.text = diary.contents
         self.dateLabel.text = self.dateToString(date: diary.date)
+        self.starButton = UIBarButtonItem(image: nil, style: .plain, target: self, action: #selector(tapStarButton))
+        self.starButton?.image = diary.isStar ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
+        self.starButton?.tintColor = .orange
+        self.navigationItem.rightBarButtonItem = self.starButton
         
         
     }
@@ -79,8 +85,24 @@ class DiaryDetailViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    
+    @objc func tapStarButton(){
+        guard let isStar = self.diary?.isStar else { return }
+        guard let indexPath = self.indexPath else { return }
+        if isStar{ //즐겨찾기가 된 상태이면 비어있는 별모양
+            self.starButton?.image = UIImage(systemName: "star")
+        } else{ //즐겨찾기가 되어있지 않은 상태면 차있는 별모영
+                self.starButton?.image = UIImage(systemName: "star.fill")
+                
+            }
+            //ture이면false, false이면 true대입
+            self.diary?.isStar = !isStar
+        self.delegate?.didSelectStar(indexPath: indexPath, isStar: self.diary?.isStar ?? false)
+      
+    }
     deinit{
         NotificationCenter.default.removeObserver(self)
     }
 }
+
+
+
