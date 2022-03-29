@@ -7,17 +7,14 @@
 
 import UIKit
 
-protocol DiaryDetailViewDelegate: AnyObject{
-    func didSelectDelete(indexPath: IndexPath)
-    func didSelectStar(indexPath: IndexPath, isStar: Bool)
-}
+
 
 class DiaryDetailViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentsTextView: UITextView!
     @IBOutlet weak var dateLabel: UILabel!
-    weak var delegate: DiaryDetailViewDelegate?
+
     var starButton: UIBarButtonItem?
     
     //일기장디테일데이터를 전달받을 프로퍼티
@@ -79,9 +76,11 @@ class DiaryDetailViewController: UIViewController {
     
     @IBAction func tapDeleteButton(_ sender: UIButton) {
         guard let indexPath = self.indexPath else { return }
-        //delegate에서 정의한 didSelectDelete메서드 호출
-        self.delegate?.didSelectDelete(indexPath: indexPath)
         //삭제버튼이 눌려지면 전 화면으로 이동
+        NotificationCenter.default.post(name: NSNotification.Name("deleteDiary"),
+                                        object: indexPath,
+                                        userInfo: nil)
+        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -96,13 +95,21 @@ class DiaryDetailViewController: UIViewController {
             }
             //ture이면false, false이면 true대입
             self.diary?.isStar = !isStar
-        self.delegate?.didSelectStar(indexPath: indexPath, isStar: self.diary?.isStar ?? false)
+        NotificationCenter.default.post(name: NSNotification.Name("starDiary"),
+                                        object: [
+                                            "diary": self.diary,
+                                            "isStar": self.diary?.isStar ?? false,
+                                            "indexPath": indexPath
+                                        ],
+                                        userInfo: nil)
+        //self.delegate?.didSelectStar(indexPath: indexPath, isStar: self.diary?.isStar ?? false)
       
     }
     deinit{
         NotificationCenter.default.removeObserver(self)
     }
 }
+
 
 
 

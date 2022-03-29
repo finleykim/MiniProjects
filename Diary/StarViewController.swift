@@ -1,9 +1,3 @@
-//
-//  StarViewController.swift
-//  Diary
-//
-//  Created by Finley on 2022/03/25.
-//
 
 import UIKit
 
@@ -17,14 +11,58 @@ private var diaryList = [Diary]()
     override func viewDidLoad() {
             super.viewDidLoad()
             self.configureCollectionView()
+        self.loadStarDiaryList()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(editDiaryNotification(_:)),
+                                               name: NSNotification.Name("editDiary"),
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(starDiaryNotification(_:)),
+                                               name: NSNotification.Name("starDiary"),
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(deleteDiaryNotification(_:)),
+                                               name: NSNotification.Name("deleteDiary"),
+                                               object: nil)
         }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.loadStarDiaryList()
+    //데이터가 동기화되면 데이터를 불러오는시점
+  
+    @objc func editDiaryNotification(_ notification: Notification){
+        guard let diary = notification.object as? Diary else { return }
+        guard let row = notification.userInfo?["indexPath.row"] as? Int else { return }
+        self.diaryList[row] = diary
+        self.diaryList = self.diaryList.sorted(by: {
+            $0.date.compare($1.date) == .orderedDescending
+        })
+       
+        self.collectionView.reloadData()
     }
     
-
+    @objc func deleteDiaryNotification(_ notification: Notification){
+            guard let indexPath = notification.object as? IndexPath else { return }
+            self.diaryList.remove(at: indexPath.row)
+            self.collectionView.deleteItems(at: [indexPath])
+        }
+    
+    @objc func starDiaryNotification(_ notification: Notification){
+        guard let starDiary = notification.object as? [String: Any] else { return }
+        guard let diary = starDiary["dairy"] as? Diary else { return }
+        guard let isStar = starDiary["isStar"] as? Bool else { return }
+        guard let indexPath = starDiary["indexPath"] as? IndexPath else { return }
+        if !isStar{
+            self.diaryList.append(diary)
+            self.diaryList = self.diaryList.sorted(by: {
+                $0.date.compare($1.date) == .orderedDescending
+            })
+            self.collectionView.reloadData()
+        } else{
+            self.diaryList.remove(at: indexPath.row)
+            self.collectionView.deleteItems(at: [indexPath])
+        }
+    }
+    
+    
     
     private func configureCollectionView(){
         self.collectionView.collectionViewLayout = UICollectionViewFlowLayout()
@@ -100,3 +138,20 @@ extension StarViewController: UICollectionViewDelegateFlowLayout{
                         // ㄴ 아이폰의 너비값 = 셀의 너비값   // ㄴ 양옆 여백간격만큼 제외
     }
 }
+
+
+extension StarViewController: UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let viewController = self.storyboard?.instantiateViewController(identifier: "DiaryDetailViewController") as? DiaryDetailViewController else { return }
+        let diary = self.diaryList[indexPath.row]
+        viewController.diary = diary
+        viewController.indexPath = indexPath
+  
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+}
+
+
+
+
+
