@@ -14,10 +14,23 @@ class StarViewController: UIViewController {
 private var diaryList = [Diary]()
     
    
+    override func viewDidLoad() {
+            super.viewDidLoad()
+            self.configureCollectionView()
+        }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.loadStarDiaryList()
+    }
+    
+
+    
+    private func configureCollectionView(){
+        self.collectionView.collectionViewLayout = UICollectionViewFlowLayout()
+        self.collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
     }
     
     private func dateToString(date: Date) -> String{
@@ -27,13 +40,6 @@ private var diaryList = [Diary]()
         return formatter.string(from: date)
     }
     
-    
-    private func configureCollectionView(){
-        self.collectionView.collectionViewLayout = UICollectionViewLayout()
-        self.collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
-    }
     
     private func loadStarDiaryList(){
         //UserDefaults에 접근
@@ -48,7 +54,7 @@ private var diaryList = [Diary]()
             guard let title = $0["title"] as? String else { return nil }
                                 // ㄴ title키로 딕셔너리의 값을 가져온다
                                          // ㄴ 딕셔너리가 any타입이기 때문에 string으로 타입변환
-            guard let contents = $0["contens"] as? String else { return nil }
+            guard let contents = $0["contents"] as? String else { return nil }
             guard let date = $0["date"] as? Date else { return nil }
             guard let isStar = $0["isStar"] as? Bool else { return nil }
             //diary타입이되도록 인스턴스화
