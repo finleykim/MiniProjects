@@ -53,8 +53,10 @@ class ViewController: UIViewController {
     
     @objc func editDiaryNotification(_ notification: Notification){
         guard let diary = notification.object as? Diary else { return }
-        guard let row = notification.userInfo?["indexPath.row"] as? Int else { return }
-        self.diaryList[row] = diary
+        // notification에서 전달받은 uuid와 값이 배열에 있는지 확인한 후 있으면 해당요소의 index를 return받고 없으면 nil
+        guard let index = self.diaryList.firstIndex(where: { $0.uuidString == diary.uuidString }) else { return }
+        //guard let row = notification.userInfo?["indexPath.row"] as? Int else { return }
+        self.diaryList[index] = diary
         self.diaryList = self.diaryList.sorted(by: {
             $0.date.compare($1.date) == .orderedDescending
         })
@@ -64,15 +66,22 @@ class ViewController: UIViewController {
     @objc func starDiaryNotification(_ notification: Notification){
         guard let starDiary = notification.object as? [String: Any] else { return }
         guard let isStar = starDiary["isStar"] as? Bool else { return }
-        guard let indexPath = starDiary["indexPath"] as? IndexPath else { return }
-        self.diaryList[indexPath.row].isStar = isStar
+        guard let uuidString = starDiary["uuidString"] as? String else { return }
+        guard let index = self.diaryList.firstIndex(where: { $0.uuidString == uuidString }) else { return }
+        self.diaryList[index].isStar = isStar
+        //guard let indexPath = starDiary["indexPath"] as? IndexPath else { return }
+        //self.diaryList[indexPath.row].isStar = isStar
 
     }
     
     @objc func deleteDiaryNotification(_ notification: Notification){
-            guard let indexPath = notification.object as? IndexPath else { return }
-            self.diaryList.remove(at: indexPath.row)
-            self.collectionView.deleteItems(at: [indexPath])
+        guard let uuidString = notification.object as? String else { return }
+       // guard let indexPath = notification.object as? IndexPath else { return }
+        guard let index = self.diaryList.firstIndex(where: { $0.uuidString == uuidString }) else { return }
+        self.diaryList.remove(at: index)
+        self.collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
+        // self.diaryList.remove(at: index.row)
+            //self.collectionView.deleteItems(at: [indexPath])
         }
     
     
@@ -89,6 +98,7 @@ class ViewController: UIViewController {
         let date = self.diaryList.map{
                        // ㄴ Diary구조체를 할당받은 프로퍼티
             [
+                "uuidString" : $0.uuidString,
                 "title" : $0.title,
                 "contents" : $0.contents,
                 "date" : $0.date,
@@ -109,11 +119,12 @@ class ViewController: UIViewController {
                                               // ㄴ object는 Any타입으로 리턴되기때문에 dictionary타입으로 타입캐스팅하고, 타입캐스팅에 실패할 경우를 대비해 guard문으로 작성한다.
         //불러온 데이터를 다이어리 리스트 배열에 넣어준다
         self.diaryList = data.compactMap{
+            guard let uuidString = $0["uuidString"] as? String else { return nil }
             guard let title = $0["title"] as? String else { return nil }
             guard let contents = $0["contents"] as? String else { return nil }
             guard let date = $0["date"] as? Date else { return nil }
             guard let isStar = $0["isStar"] as? Bool else { return nil }
-            return Diary(title: title, contents: contents, date: date, isStar: isStar)
+            return Diary(uuidString: uuidString, title: title, contents: contents, date: date, isStar: isStar)
         }
         
         self.diaryList = self.diaryList.sorted(by: {

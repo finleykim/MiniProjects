@@ -110,20 +110,31 @@ class WriteDiaryViewController: UIViewController {
         
         switch self.diaryEditorMode{
             //등록되었을때와 수정되었을 때를 나누어 각각의 동작을 결정
-        case .new: //일기가 등록되었을 때
-            let diary = Diary(title: title, contents: contents, date: date, isStar: false)
+        case .new: 
+            let diary = Diary(
+                uuidString: UUID().uuidString,
+                title: title,
+                contents: contents,
+                date: date,
+                isStar: false
+            )
             self.delegate?.didSelectReigster(diary: diary) //일기 전달받을 메서드 호출
             
             
-        case let .edit(indexPath, diary): //일기가 수정되었을 때
-            let diary = Diary(title: title, contents: contents, date: date, isStar: diary.isStar)
+        case let .edit(indexPath, diary):
+            let diary = Diary(
+                uuidString: diary.uuidString,
+                title: title,
+                contents: contents,
+                date: date,
+                isStar: diary.isStar
+            )
                       
             NotificationCenter.default.post(
                 name: NSNotification.Name("editDiary"),
                 object: diary,
-                userInfo: [
-                "indexPath.row": indexPath.row
-            ])
+                userInfo: nil
+              )
             
         }
         

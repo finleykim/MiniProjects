@@ -30,8 +30,8 @@ private var diaryList = [Diary]()
   
     @objc func editDiaryNotification(_ notification: Notification){
         guard let diary = notification.object as? Diary else { return }
-        guard let row = notification.userInfo?["indexPath.row"] as? Int else { return }
-        self.diaryList[row] = diary
+        guard let index = self.diaryList.firstIndex(where: { $0.uuidString == diary.uuidString }) else { return }
+        self.diaryList[index] = diary
         self.diaryList = self.diaryList.sorted(by: {
             $0.date.compare($1.date) == .orderedDescending
         })
@@ -40,25 +40,27 @@ private var diaryList = [Diary]()
     }
     
     @objc func deleteDiaryNotification(_ notification: Notification){
-            guard let indexPath = notification.object as? IndexPath else { return }
-            self.diaryList.remove(at: indexPath.row)
-            self.collectionView.deleteItems(at: [indexPath])
+        guard let uuidString = notification.object as? String else { return }
+        guard let index = self.diaryList.firstIndex(where: { $0.uuidString == uuidString }) else { return }
+                self.diaryList.remove(at: index)
+                self.collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
         }
     
     @objc func starDiaryNotification(_ notification: Notification){
         guard let starDiary = notification.object as? [String: Any] else { return }
         guard let diary = starDiary["dairy"] as? Diary else { return }
         guard let isStar = starDiary["isStar"] as? Bool else { return }
-        guard let indexPath = starDiary["indexPath"] as? IndexPath else { return }
-        if !isStar{
+        guard let uuidString = starDiary["uuidString"] as? String else { return }
+        if isStar{
             self.diaryList.append(diary)
             self.diaryList = self.diaryList.sorted(by: {
                 $0.date.compare($1.date) == .orderedDescending
             })
             self.collectionView.reloadData()
         } else{
-            self.diaryList.remove(at: indexPath.row)
-            self.collectionView.deleteItems(at: [indexPath])
+            guard let index = self.diaryList.firstIndex(where: { $0.uuidString == uuidString }) else { return }
+            self.diaryList.remove(at: index)
+            self.collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
         }
     }
     
@@ -78,6 +80,8 @@ private var diaryList = [Diary]()
         return formatter.string(from: date)
     }
     
+
+    
     
     private func loadStarDiaryList(){
         //UserDefaults에 접근
@@ -89,6 +93,7 @@ private var diaryList = [Diary]()
         self.diaryList = data.compactMap{
                         // compactMap메서드로 diary타입이 되도록 매핑
             //축약인자로 딕셔너리에접근
+            guard let uuidString = $0["uuidString"] as? String else { return nil }
             guard let title = $0["title"] as? String else { return nil }
                                 // ㄴ title키로 딕셔너리의 값을 가져온다
                                          // ㄴ 딕셔너리가 any타입이기 때문에 string으로 타입변환
@@ -96,7 +101,7 @@ private var diaryList = [Diary]()
             guard let date = $0["date"] as? Date else { return nil }
             guard let isStar = $0["isStar"] as? Bool else { return nil }
             //diary타입이되도록 인스턴스화
-            return Diary(title: title, contents: contents, date: date, isStar: isStar)
+            return Diary(uuidString: uuidString, title: title, contents: contents, date: date, isStar: isStar)
         }//불러온 다이어리 리스트를 filter고차함수을 이용해서 즐겨찾기된 일기만 가져오게한다
         .filter({
             $0.isStar == true
@@ -150,8 +155,6 @@ extension StarViewController: UICollectionViewDelegate{
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
-
-
 
 
 
