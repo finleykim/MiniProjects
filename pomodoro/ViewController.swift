@@ -1,5 +1,6 @@
 
 import UIKit
+import AudioToolbox
 
 class ViewController: UIViewController {
 
@@ -14,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var toggleButton: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
     
     
     var duration = 60
@@ -43,11 +45,24 @@ class ViewController: UIViewController {
             if self.timer == nil{
                 self.timer = DispatchSource.makeTimerSource(flags: [], queue: .main)
                 self.timer?.schedule(deadline: .now(), repeating: 1)
-                self.timer?.setEventHandler(handler: {[weak self] in self?.currentSeconds -= 1
-                                if self?.currentSeconds ?? 0 <= 0{
-                                    debugPrint(self?.currentSeconds)
-                                    self?.stopTimer()
-
+                self.timer?.setEventHandler(handler: {[weak self] in
+                    //시간을 시,분,초로 표현
+                    guard let self = self else { return }
+                    self.currentSeconds -= 1
+                    let hour = self.currentSeconds / 3600
+                    let minutes = (self.currentSeconds % 3600) / 60
+                    let seconds = (self.currentSeconds % 3600) % 60
+                    self.timerLabel.text = String(format: "%02d:%02d:%02d", hour, minutes, seconds)
+                    self.progressView.progress = Float(self.currentSeconds) / Float(self.duration)
+                    UIView.animate(withDuration: 0.5, delay: 0, animations: {
+                        self.imageView.transform = CGAffineTransform(rotationAngle: .pi)
+                    })
+                    UIView.animate(withDuration: 0.5, delay: 0.5, animations: {
+                        self.imageView.transform = CGAffineTransform(rotationAngle: .pi * 2)
+                    })
+                    if self.currentSeconds <= 0{
+                        self.stopTimer()
+                        AudioServicesPlaySystemSound(1005)
     }
    })
                 self.timer?.resume()
@@ -61,12 +76,15 @@ class ViewController: UIViewController {
             self.timer?.resume()
         }
         self.timerStatus = .end
-        self.setTimerInfoViewVisble(isHidden: true)
-        self.datePicker.isHidden = false
+        UIView.animate(withDuration: 0.5, animations: {
+            self.timerLabel.alpha = 0
+            self.progressView.alpha = 0
+            self.datePicker.alpha = 1
+            self.imageView.transform = .identity
+        })
         self.toggleButton.isSelected = false
         self.cancelButton.isEnabled = false
         self.timer?.cancel()
-        //타이머를 종료할 때 nil을 할당하여 메모리에서 해제시켜야한다. 그렇지않으면 화면이 벗어나도 타이머가 계속동작됨
         self.timer = nil
     }
     
@@ -84,8 +102,13 @@ class ViewController: UIViewController {
                 case .end:
                     self.currentSeconds = self.duration
                     self.timerStatus = .start
-                    self.setTimerInfoViewVisble(isHidden: false)
-                    self.datePicker.isHidden = true
+                    UIView.animate(withDuration: 0.5, animations: {
+                        self.timerLabel.alpha = 1
+                        self.progressView.alpha = 1
+                        self.datePicker.alpha = 0
+                    })
+                    //self.setTimerInfoViewVisble(isHidden: false)
+                    //self.datePicker.isHidden = true
                     self.toggleButton.isSelected = true
                     self.cancelButton.isEnabled = true
                     self.startTimer()
