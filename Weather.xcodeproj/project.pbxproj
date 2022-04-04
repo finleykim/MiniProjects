@@ -14,6 +14,7 @@
 		C5A9D67027FAA38300B28CE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5A9D66F27FAA38300B28CE3 /* Assets.xcassets */; };
 		C5A9D67327FAA38300B28CE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5A9D67127FAA38300B28CE3 /* LaunchScreen.storyboard */; };
 		C5A9D67B27FAC2CD00B28CE3 /* WeatherInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A9D67A27FAC2CD00B28CE3 /* WeatherInformation.swift */; };
+		C5A9D67D27FAEF9E00B28CE3 /*  ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A9D67C27FAEF9E00B28CE3 /*  ErrorMessage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		C5A9D67227FAA38300B28CE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C5A9D67427FAA38300B28CE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5A9D67A27FAC2CD00B28CE3 /* WeatherInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInformation.swift; sourceTree = "<group>"; };
+		C5A9D67C27FAEF9E00B28CE3 /*  ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " ErrorMessage.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				C5A9D67127FAA38300B28CE3 /* LaunchScreen.storyboard */,
 				C5A9D67427FAA38300B28CE3 /* Info.plist */,
 				C5A9D67A27FAC2CD00B28CE3 /* WeatherInformation.swift */,
+				C5A9D67C27FAEF9E00B28CE3 /*  ErrorMessage.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -144,6 +147,7 @@
 				C5A9D66B27FAA38200B28CE3 /* ViewController.swift in Sources */,
 				C5A9D67B27FAC2CD00B28CE3 /* WeatherInformation.swift in Sources */,
 				C5A9D66727FAA38200B28CE3 /* AppDelegate.swift in Sources */,
+				C5A9D67D27FAEF9E00B28CE3 /*  ErrorMessage.swift in Sources */,
 				C5A9D66927FAA38200B28CE3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

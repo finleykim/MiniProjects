@@ -10,6 +10,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var maxTempLabel: UILabel!
     @IBOutlet weak var minTempLabel: UILabel!
     
+    @IBOutlet weak var weatherStackView: UIStackView!
     
     
     
@@ -28,17 +29,47 @@ class ViewController: UIViewController {
         
     }
     
+    func configureView(weatherInformation: WeatherInformation){
+        self.cityNameLabel.text = weatherInformation.name //도시이름이 표시되도록
+        //weather의 첫번째요소를 weather상수에 할당
+        if let weather = weatherInformation.weather.first {
+            self.weatherDescriptionLabel.text = weather.description
+        }
+        self.tempLabel.text = "\(Int(weatherInformation.temp.temp - 273.15))°C"
+        self.maxTempLabel.text = "최저: \(Int(weatherInformation.temp.minTemp - 273.15))°C"
+        self.minTempLabel.text = "최저: \(Int(weatherInformation.temp.maxTemp - 273.15))°C"
+        
+    }
+    
+    func showAlert(message: String){
+        let alert = UIAlertController(title: "에러", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     
     func getCurrentWeather(cityName: String){
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(cityName)&appid=5f2fcea356ec7f45c4f5f2d80f38c01a") else { return }
         let session = URLSession(configuration: .default)
         //서버로 데이터 요청하고 응답받도록
-        session.dataTask(with: url) { data, response, error in
+        session.dataTask(with: url) { [weak self] data, response, error in
+            let successRange = (200..<300) //성공한경우=
             guard let data = data, error == nil else { return }
             let decoder = JSONDecoder()
-            let weatherInformation = try? decoder.decode(WeatherInformation.self, from: data)
-            debugPrint(weatherInformation)
+            if let response = response as? HTTPURLResponse,successRange.contains(response.statusCode){
+                guard let weatherInformation = try? decoder.decode(WeatherInformation.self, from: data) else { return }
+                DispatchQueue.main.async {
+                    //날씨정보표시 스택뷰 보여주기
+                    self?.weatherStackView.isHidden = false
+                    self?.configureView(weatherInformation: weatherInformation)
+                }
+            }else {
+                guard let errorMessage = try? decoder.decode(ErrorMessage.self, from: data) else { return }
+                DispatchQueue.main.async {
+                    self?.showAlert(message: errorMessage.message)
+                }
+            }
+           
         }.resume()
         
     }
