@@ -1,55 +1,183 @@
+//
+//  CardListViewController.swift
+//  CreditCardList
+//
+//  Created by Bo-Young PARK on 2021/07/09.
+//
 
 import UIKit
+import FirebaseDatabase
 import Kingfisher
+import FirebaseFirestore
 
-class CardListViewController: UITableViewController{
-    var creditCardList: [CreditCard] = []
+class CardListViewController: UITableViewController {
+   // var ref: DatabaseReference!     //Firebase Realtime Database
+    var db = Firestore.firestore() //Firebase Firestore
     
+    var creditCardList: [CreditCard] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //UITableView Cell Register
+        //UITableView
         let nibName = UINib(nibName: "CardListCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: "CardListCell")
         
+//        /*Firebase Database 읽기*/
+//        self.ref = Database.database().reference()
+//        //ref는 value를 관찰
+//        self.ref.observe(.value) { snapshot in
+//             //value는 dictionary타입의 값을 다운캐스팅한 snapshot의 value이다.
+//            guard let value = snapshot.value as? [String: [String: Any]] else { return }
+//            //JSON디코딩 (do try문)
+//            do {
+//                //jasonData는 value를 변환한 값
+//                let jsonData = try JSONSerialization.data(withJSONObject: value)
+//                //cardData는 jsonData를 디코딩한 CreditCard값이다.
+//                let cardData = try JSONDecoder().decode([String: CreditCard].self, from: jsonData)
+//                //cardList는 cardData의 배열이다
+//                let cardList = Array(cardData.values)
+//                //creditCardList(구조체를할당받은 프로퍼티) = 순위오름차순으로 정렬된 cardList이다.
+//                self.creditCardList = cardList.sorted { $0.rank < $1.rank }
+//
+//                //tableView reload
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                }
+//                //에러상황발생시
+//            } catch let error {
+//                print("Error json parsing \(error)")
+//            }
+//        }
         
         
+        /*Firebase firestore 읽기*/ //6:00
+        //database의 읽기에서는 observe로 관찰하지만 firestore에서는 addSnapshotListener를사용
+        db.collection("creditCardList").addSnapshotListener{snapshot, error in
+            guard let documents = snapshot?.documents else {
+                print("ERROR Firestore fetching document \(String(describing: error))")
+                return
+                
+            }
+                
+            self.creditCardList = documents.compactMap{doc -> CreditCard? in
+                do{
+                    let jsonData = try JSONSerialization.data(withJSONObject: doc.data(), options: [])
+                    let creditCard = try JSONDecoder().decode(CreditCard.self, from: jsonData)
+                    return creditCard
+            
+            }catch let error{
+                print("ERROR JSON Parsing \(error)")
+                return nil
+            }
+            
+            }.sorted {$0.rank < $1.rank}
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+
     }
-    
-    //cell의 갯수
+}
+
+//UITableView
+extension CardListViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return creditCardList.count
-        
     }
     
-    //cell에 정보전달 - cellForRowAt
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CardListCell", for: indexPath)
-                as? CardListCell else { return UITableViewCell()}
-        
-        cell.rankLabel.text = "\(creditCardList[indexPath.row].rank)위"
-        cell.promotionLabel.text = "\(creditCardList[indexPath.row].promotionDetail.amount)만원 증정"
-        cell.cardNameLabel.text = "\(creditCardList[indexPath.row].name)"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CardListCell", for: indexPath) as? CardListCell else { return UITableViewCell() }
         
         let imageURL = URL(string: creditCardList[indexPath.row].cardImageURL)
-        cell.cardImageView.kf.setImage(with: imageURL)
-
+        cell.cardImageView?.kf.setImage(with: imageURL)
+        cell.rankLabel?.text = "\(creditCardList[indexPath.row].rank)위"
+        cell.promotionLabel?.text = "\(creditCardList[indexPath.row].promotionDetail.amount)만원 증정"
+        cell.cardNameLabel?.text = creditCardList[indexPath.row].name
+        
         return cell
     }
     
-    //cell의 높이지정 - heightForRowAt
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
-        
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //상세화면전달
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        guard let detailViewController = storyboard.instantiateViewController(withIdentifier: "CardDetailViewController") as? CardDetailViewController else { return }
+        //상세화면 전달
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let detailViewController = storyboard.instantiateViewController(identifier: "CardDetailViewController") as? CardDetailViewController else { return }
         
         detailViewController.promotionDetail = creditCardList[indexPath.row].promotionDetail
         self.show(detailViewController, sender: nil)
+        
+        /*Firebase Database 쓰기
+        let cardID = creditCardList[indexPath.row].id
+         
+        //option1
+        self.ref.child("Item\(cardID)/isSelected").setValue(true)
+         
+        //option2
+         ref의 queryOrdered를 할것이고 검색대상은 "id"
+        self.ref.queryOrdered(byChild: "id").queryEqual(toValue: cardID).observe(.value) {[weak self] snapshot in
+            guard let self = self,
+                  let value = snapshot.value as? [String: [String: Any]],
+                  let key = value.keys.first else { return }
+            
+            self.ref.child("\(key)/isSelected").setValue(true)
+        }
+        */
+        
+        //Firebase Firestore 쓰기
+        let cardID = creditCardList[indexPath.row].id
+        
+        //option1
+        self.db.collection("creditCardList").document("card\(cardID)").updateData(["isSelected": true])
+        
+        //option2
+        self.db.collection("creditCardList").whereField("id", isEqualTo: cardID).getDocuments { snapshot, error in
+            guard let document = snapshot?.documents.first else {
+                print("Error Firestore fetching document: \(String(describing: error))")
+                return
+            }
+            
+            document.reference.updateData(["isSelected": true])
+        }
+         
     }
     
+    //Firebase Database/Firestore 삭제
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            /*Firebase Realtime Database 삭제
+            let cardID = creditCardList[indexPath.row].id
+            self.ref.queryOrdered(byChild: "id").queryEqual(toValue: cardID).observe(.value) {[weak self] snapshot in
+                guard let self = self,
+                      let value = snapshot.value as? [String: [String: Any]],
+                      let key = value.keys.first else { return }
+                
+                self.ref.child(key).removeValue()
+            }
+            */
+            
+            /*Firebase Firestore 삭제*/
+            let cardID = creditCardList[indexPath.row].id
+            
+            //option1
+            self.db.collection("creditCardList").document("card\(cardID)").delete()
+            
+            //option2
+            self.db.collection("creditCardList").whereField("id", isEqualTo: cardID).getDocuments { snapshot, error in
+                guard let document = snapshot?.documents.first else {
+                    print("Error Firestore fetching document: \(String(describing: error))")
+                    return
+                }
+
+                document.reference.delete()
+            }
+        }
+    }
 }
