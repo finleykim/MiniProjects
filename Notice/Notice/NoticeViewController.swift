@@ -1,9 +1,3 @@
-//
-//  NoticeViewController.swift
-//  Notice
-//
-//  Created by Finley on 2022/04/13.
-//
 
 import UIKit
 
