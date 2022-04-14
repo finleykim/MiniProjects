@@ -11,6 +11,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         
         FirebaseApp.configure()
+        Installations.installations().authTokenForcingRefresh(true, completion: { (result, error) in
+            //에러가 발생하면 프린트
+            if let error = error {
+                print("Error fetching token: \(error)")
+                return
+            }
+            //결과값이 있다면
+            guard let result = result else { return }
+            print("Installation auth token: \(result.authToken)")
+        })
         return true
     }
 

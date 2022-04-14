@@ -16,8 +16,8 @@
 		C5996D5428068E50004B07C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5996D5228068E50004B07C3 /* LaunchScreen.storyboard */; };
 		C5996D5D28068E69004B07C3 /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5996D5B28068E69004B07C3 /* NoticeViewController.swift */; };
 		C5996D5E28068E69004B07C3 /* NoticeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5996D5C28068E69004B07C3 /* NoticeViewController.xib */; };
-		C5996D6028069F6D004B07C3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5996D5F28069F6D004B07C3 /* GoogleService-Info.plist */; };
 		C5DFEEAC2806AD9300985BEA /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5DFEEAB2806AD9300985BEA /* RemoteConfigDefaults.plist */; };
+		C5F202A42807D18A007458B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5F202A32807D18A007458B1 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,8 +33,8 @@
 		C5996D5528068E50004B07C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5996D5B28068E69004B07C3 /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
 		C5996D5C28068E69004B07C3 /* NoticeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeViewController.xib; sourceTree = "<group>"; };
-		C5996D5F28069F6D004B07C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C5DFEEAB2806AD9300985BEA /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
+		C5F202A32807D18A007458B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		FFFADEE45195884C2B7CEB59 /* Pods-Notice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notice.debug.xcconfig"; path = "Target Support Files/Pods-Notice/Pods-Notice.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,7 +88,7 @@
 				C5996D5228068E50004B07C3 /* LaunchScreen.storyboard */,
 				C5996D5028068E50004B07C3 /* Assets.xcassets */,
 				C5996D5528068E50004B07C3 /* Info.plist */,
-				C5996D5F28069F6D004B07C3 /* GoogleService-Info.plist */,
+				C5F202A32807D18A007458B1 /* GoogleService-Info.plist */,
 				C5DFEEAB2806AD9300985BEA /* RemoteConfigDefaults.plist */,
 			);
 			path = Notice;
@@ -166,9 +166,9 @@
 				C5DFEEAC2806AD9300985BEA /* RemoteConfigDefaults.plist in Resources */,
 				C5996D5428068E50004B07C3 /* LaunchScreen.storyboard in Resources */,
 				C5996D5128068E50004B07C3 /* Assets.xcassets in Resources */,
-				C5996D6028069F6D004B07C3 /* GoogleService-Info.plist in Resources */,
 				C5996D5E28068E69004B07C3 /* NoticeViewController.xib in Resources */,
 				C5996D4F28068E4F004B07C3 /* Main.storyboard in Resources */,
+				C5F202A42807D18A007458B1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

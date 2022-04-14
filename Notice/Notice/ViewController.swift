@@ -1,6 +1,7 @@
 
 import UIKit
 import FirebaseRemoteConfig
+import FirebaseAnalytics
 
 class ViewController: UIViewController {
     
@@ -58,6 +59,8 @@ extension ViewController {
                 //NoticeViewController의 튜플에 위 프로퍼티값 할당
                 noticeVC.noticeContents = (title: title, detail: detail, date: date)
                 self.present(noticeVC, animated: true, completion: nil)
+            } else{
+                self.showEventAlert()
             }
         }
     }
@@ -70,5 +73,36 @@ extension ViewController {
     }
 }
 
-
-
+//A/B testing
+extension ViewController {
+    func showEventAlert(){
+        guard let remoteConfig = remoteConfig else { return }
+        
+        //패칭
+        remoteConfig.fetch {[weak self] status, _ in
+            if status == .success {
+                remoteConfig.activate(completion: nil)
+            } else {
+                print("Config not fetched")
+            }
+            
+            // message은 string값으로 전달되며 nil값일경우 비어있는 string전달
+            let message = remoteConfig["message"].stringValue ?? ""
+            // 확인버튼을 구성할 alert
+            let confirmAction = UIAlertAction(title: "확인하기", style: .default) { action in
+                Analytics.logEvent("promotion_alert", parameters: nil)
+            }
+            // 취소버튼구성. 단순히 알럿을 닫는 액션을 구성
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            // 두가지 액션(확인버튼, 취소버튼)을 포함하는 alertController구성
+            let alertController = UIAlertController(title: "깜짝 이벤트", message: message, preferredStyle: .alert)
+                                                                        // ㄴ 실험할 곳(remoteConfig에서 받은 값)// ㄴ 알럿시트와 알럿형태 중 알럿선택
+            //컨트롤러에 액션추가
+            alertController.addAction(confirmAction)
+            alertController.addAction(cancelAction)
+            //현재가진 뷰 컨트롤러에서 알럿을 띄울 수 있도록 설정
+            self?.present(alertController, animated: true, completion: nil)
+        }
+        
+    }
+}
