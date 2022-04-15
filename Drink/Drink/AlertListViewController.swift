@@ -1,10 +1,11 @@
 
 import UIKit
-
+import UserNotifications
 
 class AlertListViewController: UITableViewController{
     
     var alerts: [Alert] = []
+    let userNotificationCenter = UNUserNotificationCenter.current()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,10 @@ class AlertListViewController: UITableViewController{
             
             //인코딩 셋(추가된 값을 다시 Userdefaults에 저장)
             UserDefaults.standard.set(try? PropertyListEncoder().encode(self.alerts), forKey: "alerts")
+            //NotificationCenter에 newAlert을 추가
+            self.userNotificationCenter.addNotificationRequest(by: newAlert)
+            
+            
             
             //테이블뷰 새로고침
             self.tableView.reloadData()
