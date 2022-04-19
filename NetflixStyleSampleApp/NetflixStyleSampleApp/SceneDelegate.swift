@@ -13,23 +13,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        //windowScene선언
         guard let windowScene = scene as? UIWindowScene else { return }
         self.window = UIWindow(windowScene: windowScene)
         
-        //layout설정부분
-        //layout의 경우 필수적으로 UICollectionViewFlowLayout를 가지고있어야하기 때문에 기본으로 설정해둔다.
         let layout = UICollectionViewFlowLayout()
-        //HoeViewContoller불러오기. HomeViewController는 collectionview이기때문에 collectionViewLayout을 필수로 넣어줘야한다.
         let homeViewController = HomeViewController(collectionViewLayout: layout)
-        //navigationcontroller와 연결된 rootviewcontroller설정
         let rootNavigationController = UINavigationController(rootViewController: homeViewController)
         
-        //HomeViewController를 루트뷰로 가지고있는 navigationController지정
         self.window?.rootViewController = rootNavigationController
-        //실제로 설정한 값들을 보이게하기
         self.window?.makeKeyAndVisible()
-
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
