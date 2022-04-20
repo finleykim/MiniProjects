@@ -10,7 +10,7 @@ import SwiftUI
 
 class HomeViewController: UICollectionViewController{
     var contents : [Content] = []
-    
+    var mainItem: Item?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,15 +24,22 @@ class HomeViewController: UICollectionViewController{
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "netflix_icon"), style: .plain, target: nil, action: nil)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.crop.circle"), style: .plain, target: nil, action: nil)
-        //Data설정 가져오기
+        
+        
+        //maincell의 Data설정, 가져오기
         contents = getContents()
+        mainItem = contents.first?.contentItem.randomElement() //random으로 가져오기
+        
+        
+
         
         //collectionView Item(cell)설정
         collectionView.register(ContentCollectionViewCell.self, forCellWithReuseIdentifier: "ContentCollectionViewCell")
         
         //rankcell등록
         collectionView.register(ContentCollectionViewRankCell.self, forCellWithReuseIdentifier: "ContentCollectionViewRankCell")
-        
+        //main셀 등록
+        collectionView.register(ContentCollctionViewMainCell.self, forCellWithReuseIdentifier: "ContentCollectionViewMainCell")
         
         //섹션이름(헤더)등록
         collectionView.register(ContentCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ContentCollectionViewHeader")
@@ -71,7 +78,9 @@ class HomeViewController: UICollectionViewController{
                 return self.createLargeTypeSection()
             case .rank:
                 return self.createRankTypeSection()
-            default: return nil
+            case .main:
+                return self.createMainTypeSection()
+
             }
         }
     }
@@ -140,6 +149,20 @@ class HomeViewController: UICollectionViewController{
     }
     
     
+    //main섹션 - 컴포지셔널 레이아웃(가로스크롤)설정
+    private func createMainTypeSection() -> NSCollectionLayoutSection {
+        //item
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        //group
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(450))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        //secion
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = .init(top: 0, leading: 0, bottom: 20, trailing: 0)
+        return section
+    }
+    
     
     //sectionheader layout설정
     private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem{
@@ -162,16 +185,14 @@ class HomeViewController: UICollectionViewController{
 extension HomeViewController{
     //섹션당 셀의 갯수
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if contents[section].sectionType == .basic ||
-            contents[section].sectionType == .large ||
-            contents[section].sectionType == .rank{
+
         switch section{
         case 0: //단 하나의 컨텐츠만 보여줄 것
             return 1
         default:
             return contents[section].contentItem.count
             
-        }
+        
     }
         return 0
     }
@@ -189,7 +210,12 @@ extension HomeViewController{
             cell.imageView.image = contents[indexPath.section].contentItem[indexPath.row].image
             cell.rankLabel.text = String(describing: indexPath.row + 1)
             return cell
-        default: return UICollectionViewCell()
+        case .main:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContentCollctionViewMainCell", for: indexPath) as? ContentCollctionViewMainCell else { return UICollectionViewCell() }
+            cell.imageView.image = mainItem?.image
+            cell.descriptionLabel.text = mainItem?.description
+            return cell
+
         }
     }
     
