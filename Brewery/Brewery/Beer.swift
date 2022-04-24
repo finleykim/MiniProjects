@@ -21,6 +21,7 @@ struct Beer: Decodable{
                 .replacingOccurrences(of: ".", with: "")
                                     // ㄴ of: 삭제할대상 , with: 삭제한대상의 자리에 새로 들어갈 대상
                 .replacingOccurrences(of: ",", with: "#")
+                
         }
         return hashtags?.joined(separator: "") ?? ""
     }

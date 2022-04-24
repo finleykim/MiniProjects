@@ -31,7 +31,7 @@ class BeerListCell: UITableViewCell{
         //각 오브젝트들의 오토레이아웃
         beerImageVIew.snp.makeConstraints{
             $0.centerY.equalToSuperview()
-            $0.leading.trailing.bottom.equalToSuperview().inset(20)
+            $0.leading.top.bottom.equalToSuperview().inset(20)
             $0.width.equalTo(80)
             $0.height.equalTo(120)
             
