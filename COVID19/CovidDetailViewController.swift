@@ -16,7 +16,7 @@ class CovidDetailViewController: UITableViewController {
   @IBOutlet weak var overseasInflowCell: UITableViewCell!
   @IBOutlet weak var regionalOutbreakCell: UITableViewCell!
 
-  var covidOverview: CovidOverview?
+    var covidOverview : CovidOverview?
 
   override func viewDidLoad() {
     super.viewDidLoad()

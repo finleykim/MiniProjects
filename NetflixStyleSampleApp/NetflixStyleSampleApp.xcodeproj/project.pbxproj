@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C52588802817A8CA00170FED /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C525887F2817A8CA00170FED /* ContentView.swift */; };
 		C5282D38280EA13C0034B979 /* ContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5282D37280EA13C0034B979 /* ContentCollectionViewCell.swift */; };
 		C5282D3A280EA9450034B979 /* ContentCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5282D39280EA9450034B979 /* ContentCollectionViewHeader.swift */; };
 		C5293865280EEA7100E99E07 /* ContentCollectionViewRankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5293864280EEA7100E99E07 /* ContentCollectionViewRankCell.swift */; };
@@ -18,11 +19,13 @@
 		C57CF731280D50EA000044D5 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C57CF730280D50EA000044D5 /* SnapKit */; };
 		C57CF733280D687B000044D5 /* Content.plist in Resources */ = {isa = PBXBuildFile; fileRef = C57CF732280D687B000044D5 /* Content.plist */; };
 		C57CF735280D68DF000044D5 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57CF734280D68DF000044D5 /* Content.swift */; };
+		C5925D682817ADE500C362AD /* ContentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5925D672817ADE500C362AD /* ContentDetailView.swift */; };
 		C5949CC7281044BC00A000FA /* ContentCollctionViewMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5949CC6281044BC00A000FA /* ContentCollctionViewMainCell.swift */; };
 		C5949CC928104D2B00A000FA /* UIIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5949CC828104D2B00A000FA /* UIIButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C525887F2817A8CA00170FED /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C5282D37280EA13C0034B979 /* ContentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewCell.swift; sourceTree = "<group>"; };
 		C5282D39280EA9450034B979 /* ContentCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewHeader.swift; sourceTree = "<group>"; };
 		C5293864280EEA7100E99E07 /* ContentCollectionViewRankCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewRankCell.swift; sourceTree = "<group>"; };
@@ -35,6 +38,7 @@
 		C57CF72D280D4909000044D5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C57CF732280D687B000044D5 /* Content.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Content.plist; path = "../../../../../../Downloads/Part 3/Ch6_NetflixStyle/Content.plist"; sourceTree = "<group>"; };
 		C57CF734280D68DF000044D5 /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
+		C5925D672817ADE500C362AD /* ContentDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailView.swift; sourceTree = "<group>"; };
 		C5949CC6281044BC00A000FA /* ContentCollctionViewMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollctionViewMainCell.swift; sourceTree = "<group>"; };
 		C5949CC828104D2B00A000FA /* UIIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIIButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,6 +87,8 @@
 				C5293864280EEA7100E99E07 /* ContentCollectionViewRankCell.swift */,
 				C5949CC6281044BC00A000FA /* ContentCollctionViewMainCell.swift */,
 				C5949CC828104D2B00A000FA /* UIIButton.swift */,
+				C525887F2817A8CA00170FED /* ContentView.swift */,
+				C5925D672817ADE500C362AD /* ContentDetailView.swift */,
 			);
 			path = NetflixStyleSampleApp;
 			sourceTree = "<group>";
@@ -165,11 +171,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C57CF71A280D474B000044D5 /* AppDelegate.swift in Sources */,
+				C5925D682817ADE500C362AD /* ContentDetailView.swift in Sources */,
 				C5282D3A280EA9450034B979 /* ContentCollectionViewHeader.swift in Sources */,
 				C57CF71C280D474B000044D5 /* SceneDelegate.swift in Sources */,
 				C5949CC7281044BC00A000FA /* ContentCollctionViewMainCell.swift in Sources */,
 				C5949CC928104D2B00A000FA /* UIIButton.swift in Sources */,
 				C5293865280EEA7100E99E07 /* ContentCollectionViewRankCell.swift in Sources */,
+				C52588802817A8CA00170FED /* ContentView.swift in Sources */,
 				C57CF72E280D4909000044D5 /* HomeViewController.swift in Sources */,
 				C57CF735280D68DF000044D5 /* Content.swift in Sources */,
 				C5282D38280EA13C0034B979 /* ContentCollectionViewCell.swift in Sources */,

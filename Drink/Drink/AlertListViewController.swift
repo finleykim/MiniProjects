@@ -22,10 +22,7 @@ class AlertListViewController: UITableViewController{
     
     @IBAction func addAlertButtonAction(_ sender: Any) {
         //스토리보드의 addAlertViewController 인스턴스화
-        guard let addAlertViewController = storyboard?.instantiateViewController(withIdentifier: "addAlertViewController") as? addAlertViewController else { return }
-        //addAlertViewController로부터 전달받을 정보핸들링
-        addAlertViewController.pickedDate = {[weak self] date in
-            guard let self = self else { return }
+       
          
           
             //자식뷰에 설정된 Alert값을 불러오기
