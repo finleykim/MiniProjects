@@ -7,8 +7,10 @@ struct ContentDetailView: View {
     @State var item: Item?
     
     var body: some View {
-        VStack{
-            if let item = item{
+        ZStack{
+            Color.black.edgesIgnoringSafeArea(.all)
+        ZStack(alignment: .bottom){
+            if let item = item {
                 Image(uiImage: item.image)
                     .aspectRatio(contentMode: .fit)
                 Text(item.description)
@@ -16,9 +18,14 @@ struct ContentDetailView: View {
                     .fontWeight(.semibold)
                     .multilineTextAlignment(.center)
                     .padding()
+                    .foregroundColor(.primary)
+                    .background(Color.primary
+                                    .colorInvert()
+                                    .opacity(0.75))
             } else {
                 Color.white
             }
+        }
         }
     }
 }
