@@ -16,7 +16,8 @@ struct ContentView: View {
         //탭뷰설정
         TabView(selection: $selection){
                         // ㄴ @State 불러오기
-            Color.white
+            AssetView()
+            //Color.white
                 .tabItem{
                     Image(systemName: "dollarsign.circle.fill")
                     Text("자산")

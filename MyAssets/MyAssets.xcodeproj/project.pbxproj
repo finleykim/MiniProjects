@@ -11,6 +11,11 @@
 		C514CCE9281A201E00A6E75F /* AssetMenuButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C514CCE8281A201E00A6E75F /* AssetMenuButtonStyle.swift */; };
 		C514CCEB281A232C00A6E75F /* AssetMenuGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C514CCEA281A232C00A6E75F /* AssetMenuGridView.swift */; };
 		C514CCED281A24A800A6E75F /* AssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C514CCEC281A24A800A6E75F /* AssetView.swift */; };
+		C514CCF1281A281B00A6E75F /* AssetBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C514CCF0281A281B00A6E75F /* AssetBanner.swift */; };
+		C514CCF4281A288B00A6E75F /* BannerCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C514CCF3281A288B00A6E75F /* BannerCard.swift */; };
+		C514CCF7281A2B4A00A6E75F /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C514CCF6281A2B4A00A6E75F /* PageViewController.swift */; };
+		C514CCF9281A318600A6E75F /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C514CCF8281A318600A6E75F /* PageControl.swift */; };
+		C514CCFB281A359800A6E75F /* AssetBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C514CCFA281A359800A6E75F /* AssetBannerView.swift */; };
 		C578D6492818E37F004A4BBF /* MyAssetsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C578D6482818E37F004A4BBF /* MyAssetsApp.swift */; };
 		C578D64B2818E37F004A4BBF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C578D64A2818E37F004A4BBF /* ContentView.swift */; };
 		C578D64D2818E380004A4BBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C578D64C2818E380004A4BBF /* Assets.xcassets */; };
@@ -23,6 +28,11 @@
 		C514CCE8281A201E00A6E75F /* AssetMenuButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetMenuButtonStyle.swift; sourceTree = "<group>"; };
 		C514CCEA281A232C00A6E75F /* AssetMenuGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetMenuGridView.swift; sourceTree = "<group>"; };
 		C514CCEC281A24A800A6E75F /* AssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetView.swift; sourceTree = "<group>"; };
+		C514CCF0281A281B00A6E75F /* AssetBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetBanner.swift; sourceTree = "<group>"; };
+		C514CCF3281A288B00A6E75F /* BannerCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCard.swift; sourceTree = "<group>"; };
+		C514CCF6281A2B4A00A6E75F /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		C514CCF8281A318600A6E75F /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
+		C514CCFA281A359800A6E75F /* AssetBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetBannerView.swift; sourceTree = "<group>"; };
 		C578D6452818E37F004A4BBF /* MyAssets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyAssets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C578D6482818E37F004A4BBF /* MyAssetsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAssetsApp.swift; sourceTree = "<group>"; };
 		C578D64A2818E37F004A4BBF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -42,6 +52,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C514CCF2281A283E00A6E75F /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				C514CCE6281A1B5F00A6E75F /* AssetMenu.swift */,
+				C514CCF0281A281B00A6E75F /* AssetBanner.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		C514CCF5281A28A200A6E75F /* AssetMenu */ = {
+			isa = PBXGroup;
+			children = (
+				C514CCE8281A201E00A6E75F /* AssetMenuButtonStyle.swift */,
+				C514CCEA281A232C00A6E75F /* AssetMenuGridView.swift */,
+			);
+			path = AssetMenu;
+			sourceTree = "<group>";
+		};
+		C514CCFC281A35C200A6E75F /* AssetBannerView */ = {
+			isa = PBXGroup;
+			children = (
+				C514CCF8281A318600A6E75F /* PageControl.swift */,
+				C514CCF6281A2B4A00A6E75F /* PageViewController.swift */,
+				C514CCF3281A288B00A6E75F /* BannerCard.swift */,
+				C514CCFA281A359800A6E75F /* AssetBannerView.swift */,
+			);
+			path = AssetBannerView;
+			sourceTree = "<group>";
+		};
 		C578D63C2818E37F004A4BBF = {
 			isa = PBXGroup;
 			children = (
@@ -64,11 +103,11 @@
 				C578D6482818E37F004A4BBF /* MyAssetsApp.swift */,
 				C578D64A2818E37F004A4BBF /* ContentView.swift */,
 				C578D6AA2818EDE0004A4BBF /* NavigationBarWithButton.swift */,
-				C578D64C2818E380004A4BBF /* Assets.xcassets */,
-				C514CCE6281A1B5F00A6E75F /* AssetMenu.swift */,
-				C514CCE8281A201E00A6E75F /* AssetMenuButtonStyle.swift */,
-				C514CCEA281A232C00A6E75F /* AssetMenuGridView.swift */,
 				C514CCEC281A24A800A6E75F /* AssetView.swift */,
+				C578D64C2818E380004A4BBF /* Assets.xcassets */,
+				C514CCFC281A35C200A6E75F /* AssetBannerView */,
+				C514CCF5281A28A200A6E75F /* AssetMenu */,
+				C514CCF2281A283E00A6E75F /* Entities */,
 				C578D64E2818E380004A4BBF /* Preview Content */,
 			);
 			path = MyAssets;
@@ -153,11 +192,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				C514CCEB281A232C00A6E75F /* AssetMenuGridView.swift in Sources */,
+				C514CCF7281A2B4A00A6E75F /* PageViewController.swift in Sources */,
 				C578D6AB2818EDE0004A4BBF /* NavigationBarWithButton.swift in Sources */,
+				C514CCF1281A281B00A6E75F /* AssetBanner.swift in Sources */,
 				C514CCED281A24A800A6E75F /* AssetView.swift in Sources */,
 				C578D64B2818E37F004A4BBF /* ContentView.swift in Sources */,
 				C578D6492818E37F004A4BBF /* MyAssetsApp.swift in Sources */,
 				C514CCE7281A1B5F00A6E75F /* AssetMenu.swift in Sources */,
+				C514CCF9281A318600A6E75F /* PageControl.swift in Sources */,
+				C514CCFB281A359800A6E75F /* AssetBannerView.swift in Sources */,
+				C514CCF4281A288B00A6E75F /* BannerCard.swift in Sources */,
 				C514CCE9281A201E00A6E75F /* AssetMenuButtonStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
