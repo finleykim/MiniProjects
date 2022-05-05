@@ -9,7 +9,7 @@ import SnapKit
 import UIKit
 
 final class RankingFeatureSectionView: UIView {
-   // private let cellHeight: CGFloat = 30.0
+   
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
