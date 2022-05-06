@@ -10,7 +10,7 @@ import UIKit
 
 final class FeatureSectionView: UIView {
     
-
+    private var featureList : [Feature] = []
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal //가로스크롤설정
@@ -36,6 +36,9 @@ final class FeatureSectionView: UIView {
         super.init(frame: frame)
 
         setupViews()
+        fetchData()
+        collectionView.reloadData()
+        
 
     }
 
@@ -48,13 +51,14 @@ final class FeatureSectionView: UIView {
 
 extension FeatureSectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10 // 이후 셀이 필요한 정보의 갯수만큼 숫자를 설정할 것이지만, 정보가들어갈 엔티티를 구성하기 전이기 때문에 임의의 숫자를 부여해둔다.
+        featureList.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //임의의 값 반환
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeatureSectionCollectionViewCell", for: indexPath) as? FeatureSectionCollectionViewCell
-        cell?.setup()
+        let feature = featureList[indexPath.item]
+        cell?.setup(feature: feature)
 
         return cell ?? UICollectionViewCell()
     }
@@ -99,14 +103,16 @@ private extension FeatureSectionView {
         }
     }
 
-//    func fetchData() {
-//        guard let url = Bundle.main.url(forResource: "Feature", withExtension: "plist") else { return }
-//
-//        do {
-//            let data = try Data(contentsOf: url)
-//            let result = try PropertyListDecoder().decode([Feature].self, from: data)
-//            featureList = result
-//        } catch {}
-//    }
 
+
+    
+    func fetchData(){
+        guard let url = Bundle.main.url(forResource: "Feature", withExtension: "plist") else { return }
+        do{
+            let data = try Data(contentsOf: url)
+            let result = try PropertyListDecoder().decode([Feature].self, from: data)
+            featureList = result
+        }catch{}
+    }
+    
 }

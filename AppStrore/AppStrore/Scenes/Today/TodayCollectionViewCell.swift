@@ -38,17 +38,21 @@ final class TodayCollectionViewCell: UICollectionViewCell {
     }()
 
 
-    //표시확인 (임의의데이터)
-    func setup(){
+    //표시확인
+    func setup(today: Today){
         setupSubViews()
         
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.3
         layer.shadowRadius = 10
         
-        subTitleLabel.text = "서브타이틀"
-        descriptionLabel.text = "설명"
-        titleLabel.text = "앱의이름"
+        subTitleLabel.text = today.subTitle
+        descriptionLabel.text = today.description
+        titleLabel.text = today.title
+        
+        if let imageURL = URL(string: today.imageURL){
+            imageView.kf.setImage(with: imageURL)
+        }
     }
     
     

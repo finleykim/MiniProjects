@@ -8,10 +8,14 @@
 import UIKit
 import SnapKit
 
-final class DetailHeaderView : UIView {
-
+ class DetailHeaderView : UIView {
+    var todayList : [Today] = []
     static var height: CGFloat { 170.0 }
 
+    
+    
+
+    
     private lazy var mainImage : UIImageView = {
        let mainImage = UIImageView()
         mainImage.backgroundColor = .yellow
@@ -19,25 +23,28 @@ final class DetailHeaderView : UIView {
         mainImage.contentMode = .scaleAspectFill
         mainImage.clipsToBounds = true
         
+        
         return mainImage
     }()
 
 
-    private lazy var titleLabel : UILabel = {
+   public let titleLabel : UILabel = {
         let titleLable = UILabel()
+        
         titleLable.textColor = .label
         titleLable.font = .systemFont(ofSize: 20, weight: .bold)
-        titleLable.text = "Title"
+      
+       
         
         return titleLable
     }()
     
     
-    private lazy var subTitleLable : UILabel = {
+    public let subTitleLable : UILabel = {
         let subTitleLabel = UILabel()
         subTitleLabel.textColor = .secondaryLabel
         subTitleLabel.font = .systemFont(ofSize: 14, weight: .medium)
-        subTitleLabel.text = "subTitle"
+        
         
         return subTitleLabel
     }()
@@ -57,16 +64,25 @@ final class DetailHeaderView : UIView {
        let shareButton = UIButton()
         shareButton.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
         shareButton.tintColor = .systemBlue
-        shareButton.layer.cornerRadius = 12
+//        shareButton.addTarget(self, action: #selector(didTapShareButton), for: .touchUpInside)
         
         return shareButton
     }()
     
+//     @objc func didTapShareButton() {
+//         let actityItems: [Any] = [today.title]
+//         let activityViewController = UIActivityViewController(activityItems: actityItems, applicationActivities: nil)
+//         present(activityViewController, animated: true)
+//     }
+//
     private let separatorView = SeparatorView(frame: .zero)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
+        
+
+        
         
     }
     
@@ -82,7 +98,7 @@ final class DetailHeaderView : UIView {
 
 
 
-private extension DetailHeaderView{
+extension DetailHeaderView{
     func setupLayout(){
         [
             mainImage,
@@ -105,7 +121,7 @@ private extension DetailHeaderView{
             $0.leading.equalTo(mainImage.snp.trailing).offset(16)
             $0.trailing.equalToSuperview().inset(16)
         }
-        
+         
         subTitleLable.snp.makeConstraints{
             $0.top.equalTo(titleLabel.snp.bottom).offset(4)
             $0.leading.equalTo(titleLabel.snp.leading)
