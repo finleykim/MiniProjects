@@ -18,6 +18,7 @@
 		C56C11252827BD5A00CAD0DE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C56C11242827BD5A00CAD0DE /* SnapKit */; };
 		C56C11272827C09A00CAD0DE /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56C11262827C09A00CAD0DE /* TabBarController.swift */; };
 		C591CD982827F53100EB8229 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C591CD972827F53100EB8229 /* UIButton+.swift */; };
+		C5B2AC4C282A0701008D14F7 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B2AC4B282A0701008D14F7 /* UploadViewController.swift */; };
 		C5B465E22827DE7000EC8D5C /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B465E12827DE7000EC8D5C /* FeedTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		C56C111D2827BD4200CAD0DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C56C11262827C09A00CAD0DE /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C591CD972827F53100EB8229 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		C5B2AC4B282A0701008D14F7 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		C5B465E12827DE7000EC8D5C /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,6 +56,7 @@
 			children = (
 				C56C11132827BD4000CAD0DE /* FeedViewController.swift */,
 				C5B465E12827DE7000EC8D5C /* FeedTableViewCell.swift */,
+				C5B2AC4B282A0701008D14F7 /* UploadViewController.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C56C11142827BD4000CAD0DE /* FeedViewController.swift in Sources */,
+				C5B2AC4C282A0701008D14F7 /* UploadViewController.swift in Sources */,
 				C5333D872828C0F2005E2E9B /* ProfileCollectionViewCell.swift in Sources */,
 				C591CD982827F53100EB8229 /* UIButton+.swift in Sources */,
 				C56C11272827C09A00CAD0DE /* TabBarController.swift in Sources */,
