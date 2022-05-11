@@ -9,12 +9,13 @@ import UIKit
 import SnapKit
 
 class StationSearchViewController: UIViewController {
-    private var numberOfCell: Int = 0 //임의
+    private var numberOfCell: Int = 0 //임의 
 
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.isHidden = true
         
         return tableView
@@ -43,6 +44,7 @@ class StationSearchViewController: UIViewController {
     private func setTableViewLayout(){
         view.addSubview(tableView)
         tableView.snp.makeConstraints{ $0.edges.equalToSuperview()}
+        
     }
     
 }
@@ -50,12 +52,20 @@ class StationSearchViewController: UIViewController {
 extension StationSearchViewController: UISearchBarDelegate{
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         numberOfCell = 10 //임시
+        tableView.reloadData()
         tableView.isHidden = false
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         numberOfCell = 0 //임시
         tableView.isHidden = true
+    }
+}
+
+extension StationSearchViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = StationDetailViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -70,4 +80,6 @@ extension StationSearchViewController: UITableViewDataSource{
         
         return cell
     }
+    
+    
 }

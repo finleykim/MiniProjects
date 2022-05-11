@@ -15,6 +15,8 @@
 		C5F27D10282B4769000A4540 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5F27D0E282B4769000A4540 /* LaunchScreen.storyboard */; };
 		C5F27D19282B4780000A4540 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C5F27D18282B4780000A4540 /* SnapKit */; };
 		C5F27D1C282B47C9000A4540 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C5F27D1B282B47C9000A4540 /* Alamofire */; };
+		C5F27D1F282B5B5D000A4540 /* StationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F27D1E282B5B5D000A4540 /* StationDetailViewController.swift */; };
+		C5F27D21282B613A000A4540 /* StationDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F27D20282B613A000A4540 /* StationDetailCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		C5F27D0C282B4769000A4540 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C5F27D0F282B4769000A4540 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C5F27D11282B4769000A4540 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5F27D1E282B5B5D000A4540 /* StationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewController.swift; sourceTree = "<group>"; };
+		C5F27D20282B613A000A4540 /* StationDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,13 +66,23 @@
 			children = (
 				C5F27D03282B4765000A4540 /* AppDelegate.swift */,
 				C5F27D05282B4765000A4540 /* SceneDelegate.swift */,
-				C5F27D07282B4765000A4540 /* StationSearchViewController.swift */,
+				C5F27D1D282B5B46000A4540 /* Scenes */,
 				C5F27D09282B4765000A4540 /* Main.storyboard */,
 				C5F27D0C282B4769000A4540 /* Assets.xcassets */,
 				C5F27D0E282B4769000A4540 /* LaunchScreen.storyboard */,
 				C5F27D11282B4769000A4540 /* Info.plist */,
 			);
 			path = SubwayStation;
+			sourceTree = "<group>";
+		};
+		C5F27D1D282B5B46000A4540 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				C5F27D07282B4765000A4540 /* StationSearchViewController.swift */,
+				C5F27D1E282B5B5D000A4540 /* StationDetailViewController.swift */,
+				C5F27D20282B613A000A4540 /* StationDetailCollectionViewCell.swift */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,8 +164,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5F27D1F282B5B5D000A4540 /* StationDetailViewController.swift in Sources */,
 				C5F27D08282B4765000A4540 /* StationSearchViewController.swift in Sources */,
 				C5F27D04282B4765000A4540 /* AppDelegate.swift in Sources */,
+				C5F27D21282B613A000A4540 /* StationDetailCollectionViewCell.swift in Sources */,
 				C5F27D06282B4765000A4540 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
