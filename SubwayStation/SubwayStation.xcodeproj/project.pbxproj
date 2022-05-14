@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C5AEF645282F36C700BB1EC5 /* StationResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEF644282F36C700BB1EC5 /* StationResponseModel.swift */; };
+		C5AEF647282F3D7100BB1EC5 /* StationArrivalDatResponsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEF646282F3D7100BB1EC5 /* StationArrivalDatResponsModel.swift */; };
 		C5F27D04282B4765000A4540 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F27D03282B4765000A4540 /* AppDelegate.swift */; };
 		C5F27D06282B4765000A4540 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F27D05282B4765000A4540 /* SceneDelegate.swift */; };
 		C5F27D08282B4765000A4540 /* StationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F27D07282B4765000A4540 /* StationSearchViewController.swift */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C5AEF644282F36C700BB1EC5 /* StationResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationResponseModel.swift; sourceTree = "<group>"; };
+		C5AEF646282F3D7100BB1EC5 /* StationArrivalDatResponsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationArrivalDatResponsModel.swift; sourceTree = "<group>"; };
 		C5F27D00282B4765000A4540 /* SubwayStation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SubwayStation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5F27D03282B4765000A4540 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5F27D05282B4765000A4540 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +75,8 @@
 				C5F27D0C282B4769000A4540 /* Assets.xcassets */,
 				C5F27D0E282B4769000A4540 /* LaunchScreen.storyboard */,
 				C5F27D11282B4769000A4540 /* Info.plist */,
+				C5AEF644282F36C700BB1EC5 /* StationResponseModel.swift */,
+				C5AEF646282F3D7100BB1EC5 /* StationArrivalDatResponsModel.swift */,
 			);
 			path = SubwayStation;
 			sourceTree = "<group>";
@@ -165,6 +171,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5F27D1F282B5B5D000A4540 /* StationDetailViewController.swift in Sources */,
+				C5AEF645282F36C700BB1EC5 /* StationResponseModel.swift in Sources */,
+				C5AEF647282F3D7100BB1EC5 /* StationArrivalDatResponsModel.swift in Sources */,
 				C5F27D08282B4765000A4540 /* StationSearchViewController.swift in Sources */,
 				C5F27D04282B4765000A4540 /* AppDelegate.swift in Sources */,
 				C5F27D21282B613A000A4540 /* StationDetailCollectionViewCell.swift in Sources */,

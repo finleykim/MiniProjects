@@ -7,6 +7,7 @@
 
 import SnapKit
 import UIKit
+import Alamofire
 
 final class StationDetailViewController: UIViewController{
     
@@ -19,7 +20,20 @@ final class StationDetailViewController: UIViewController{
     //임시코드
     @objc func fetchData(){
         print("REFRESH")
-        refreshControl.endRefreshing()
+       // refreshControl.endRefreshing()
+        
+        let stationName = "왕십리역"
+        let urlString = "http://swopenapi.seoul.go.kr/api/subway/sample/json/realtimeStationArrival/0/5/\(stationName.replacingOccurrences(of:"역", with: ""))"
+        
+        AF
+            .request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+            .responseDecodable(of: StationArrivalDatResponseModel.self) { [weak self] response in
+                self?.refreshControl.endRefreshing()
+                guard case .success(let data) = response.result else { return }
+                
+                print(data.realtimeArrivalList)
+            }
+            .resume()
     }
     
     private lazy var collectionViekw: UICollectionView = {
@@ -42,7 +56,7 @@ final class StationDetailViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fetchData()
         navigationItem.title = "왕심리" //임시코드
         
         view.addSubview(collectionViekw)
