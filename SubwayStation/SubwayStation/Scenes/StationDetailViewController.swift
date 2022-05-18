@@ -10,7 +10,8 @@ import UIKit
 import Alamofire
 
 final class StationDetailViewController: UIViewController{
-    
+    private let station: Station
+    private var realtimeArrivalList : [StationArrivalDatResponseModel.RealTimeArrival] = []
     private lazy var refreshControl : UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(fetchData), for: .valueChanged)
@@ -19,10 +20,10 @@ final class StationDetailViewController: UIViewController{
     }()
     //임시코드
     @objc func fetchData(){
-        print("REFRESH")
-       // refreshControl.endRefreshing()
+
         
-        let stationName = "왕십리역"
+//        let stationName = "왕십리역"
+        let stationName = station.stationName
         let urlString = "http://swopenapi.seoul.go.kr/api/subway/sample/json/realtimeStationArrival/0/5/\(stationName.replacingOccurrences(of:"역", with: ""))"
         
         AF
@@ -31,7 +32,9 @@ final class StationDetailViewController: UIViewController{
                 self?.refreshControl.endRefreshing()
                 guard case .success(let data) = response.result else { return }
                 
-                print(data.realtimeArrivalList)
+//                print(data.realtimeArrivalList)
+                self?.realtimeArrivalList = data.realtimeArrivalList
+                self?.collectionViekw.reloadData()
             }
             .resume()
     }
@@ -54,10 +57,21 @@ final class StationDetailViewController: UIViewController{
         
     }()
     
+    init(station: Station){
+        self.station = station
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchData()
-        navigationItem.title = "왕심리" //임시코드
+//        navigationItem.title = "왕심리" //임시코드
+        navigationItem.title = station.stationName
         
         view.addSubview(collectionViekw)
         collectionViekw.snp.makeConstraints{ $0.edges.equalToSuperview() }
@@ -68,13 +82,15 @@ final class StationDetailViewController: UIViewController{
 
 extension StationDetailViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+//        return 3
+        return realtimeArrivalList.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StationDetailCollectionViewCell", for: indexPath) as? StationDetailCollectionViewCell
         
-        //cell.backgroundColor = .gray
-        cell?.setup()
+        let realTimeArrival =
+        realtimeArrivalList[indexPath.row]
+        cell?.setup(with: realTimeArrival)
         
         return cell ?? UICollectionViewCell()
     }
