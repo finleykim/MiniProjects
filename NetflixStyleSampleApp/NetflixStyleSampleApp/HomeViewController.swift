@@ -194,7 +194,7 @@ extension HomeViewController{
             
         
     }
-        return 0
+        
     }
     
     //콜렉션 뷰 셀 설정 (만들어둔 셀 적용)

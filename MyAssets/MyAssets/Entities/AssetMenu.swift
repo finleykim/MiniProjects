@@ -39,8 +39,6 @@ enum AssetMenu: String, Identifiable, Decodable{
             return "dollarsign.circle"
         case .realEstate:
             return "house.fill"
-            
-      
         }
     }
     
