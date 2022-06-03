@@ -5,7 +5,7 @@
 //  Created by Finley on 2022/04/28.
 //
 
-im port SwiftUI
+import SwiftUI
 
 struct AssetMenuButtonStyle: ButtonStyle {
     let menu: AssetMenu
