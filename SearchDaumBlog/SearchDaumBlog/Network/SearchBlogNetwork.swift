@@ -8,6 +8,8 @@
 import Foundation
 import RxSwift
 
+
+//에러케이스 열거
 enum SearchNetworkError: Error {
     case invalidURL
     case invalidJSON

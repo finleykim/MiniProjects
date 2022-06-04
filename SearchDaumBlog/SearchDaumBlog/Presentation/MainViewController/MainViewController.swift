@@ -39,11 +39,92 @@ class MainViewController: UIViewController{
     
     
     private func bind(){ //필터링버튼을 알럿으로 전환
+        let blogResult = searchBar.shouldLoadResult
+            .flatMapLatest{ query in
+                SearchBlogNetwork().searchBlog(query: query)
+            }
+            .share() //스트림을 계속해서 새로만들지 않고 공유할 수 있게 함
+        let blogValue = blogResult
+            .compactMap{ data -> DKBlog? in
+                guard case .success(let value) = data else {
+                    return nil
+                }
+                return value
+            }
+        
+        let blogError = blogResult
+            .compactMap{ data -> String? in
+                guard case .failure(let error) = data else{
+                    return nil
+                }
+                return error.localizedDescription
+            }
+        
+        //네트워크를 통해 가져온 값을 cellData로 변환
+        let cellData = blogValue
+            .map{ blog -> [BlogListCellData] in
+                return blog.documetns
+                    .map{ doc in
+                        let thumbnailURL = URL(string: doc.thumbnail ?? "")
+                        return BlogListCellData(thumbnailURL: thumbnailURL, name: doc.name, title: doc.title, detetime: doc.datetime)
+                    }
+                
+            }
+
+        
+        //FilterView를 선택했을 때 나오는 alertsheet를 선택했을 때 type
+        let sortedType = alertAcitonTapped
+            .filter{
+                switch $0{
+                case .title, .datetime:
+                    return true
+                default:
+                    return false
+                }
+            }
+            .startWith(.title)
+        
+        //MainViewController -> ListView
+        //cellData와 sortedType 두 옵저버블을 합쳐야한다.
+        Observable
+            .combineLatest(
+                sortedType,
+                cellData
+            ) { type, data -> [BlogListCellData] in
+                switch type {
+                case .title:
+                    return data.sorted { $0.title ?? "" < $1.title ?? "" }
+                case .datetime:
+                    return data.sorted { $0.datetime ?? Date() > $1.datetime ?? Date() }
+                case .cancel, .confirm:
+                    return data
+                }
+            }
+            .bind(to: listView.cellData)
+            .disposed(by: disposeBag)
+        
+        
         let alertSheetForSorting = listView.headerView.sortButtonTapped //filter버튼이 탭되었을 때,
             .map { _ -> Alert in
                 return (title: nil, message: nil, actions: [.title, .datetime, .cancel], style: .actionSheet)
                 // ㄴ presentAlertControll의 파라메터
             }
+        //에러메시지가 알럿에 뜨도록
+        let alertForErrorMessage = blogError
+            .map { message -> Alert in
+                return (
+                    title: "앗",
+                    message: "예상치 못한 오류가 발생했습니다. 잠시 후 다시 시도해주세요. \(message)",
+                    actions: [.confirm],
+                    style: .alert
+                )
+            }
+        //알럿을 정렬할 때, 에러가 발생했을 때 두가지 경우 모두 설정한 알럿이 뜨도록 설정
+        Observable
+            .merge(
+                alertSheetForSorting,
+                alertForErrorMessage
+            )
         
         alertSheetForSorting
             .asSignal(onErrorSignalWith: .empty())
