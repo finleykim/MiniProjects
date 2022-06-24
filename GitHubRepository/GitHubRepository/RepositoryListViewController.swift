@@ -69,7 +69,9 @@ class RepositoryListViewController: UITableViewController{
                       let result = json as? [[String: Any]] else { //데이터의 생김새가 [[String: Any]]임을 알려준다.
                     return [] //안되겠으면 빈 어레이 반환
                 }
+                print(result)
                 return result
+                
             }
         //결과값을 제대로 풀지 못하면 빈 어레이가 반환되는데 그 결과값을 무시하도록 필터링해야함
             .filter{ result in
@@ -82,9 +84,7 @@ class RepositoryListViewController: UITableViewController{
                           let name = dic["name"] as? String, //name이라는 키값을 가진 데이터를 name이라고 정의
                           let description = dic["description"] as? String,
                           let stargazersCount = dic["stargazers_count"] as? Int,
-                          let language = dic["language"] as? String else {
-                        return nil
-                    }
+                          let language = dic["language"] as? String else { return nil }
                     return Repository(id: id, name: name, description: description, stargazersCount: stargazersCount, language: language)
                 }
             }
