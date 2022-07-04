@@ -39,17 +39,21 @@ class MainViewController: UIViewController{
     
     
     private func bind(){ //필터링버튼을 알럿으로 전환
-        let blogResult = searchBar.shouldLoadResult
+        let blogResult = searchBar.shouldLoadResult //searchBar의 텍스트를 밖으로 전달하는 
             .flatMapLatest{ query in
-                SearchBlogNetwork().searchBlog(query: query)
-            }
+                SearchBlogNetwork().searchBlog(query: query) //searchBlog는 검색텍스트로 네트워크를 수행하는 메서드
+            } //searchBar의 텍스트가 클로저의 매개변수 query를 통해 searchBlog의 매개변수 query를 채운다.
+            //즉, searchBar의 텍스트를 네트워크수행 메서드에 넣어서 통신한다.
             .share() //스트림을 계속해서 새로만들지 않고 공유할 수 있게 함
+        
+        
+            //BlogResult는 제대로된 값을 내보내거나 애러를 내보낼 것이기 때문에 그 두가지 경우를 아래와 같이 정의한다.
         let blogValue = blogResult
             .compactMap{ data -> DKBlog? in
-                guard case .success(let value) = data else {
+                guard case .success(let value) = data else { //result
                     return nil
                 }
-                return value
+                return value //성공하면 value를 꺼내온다.
             }
         
         let blogError = blogResult
@@ -57,14 +61,14 @@ class MainViewController: UIViewController{
                 guard case .failure(let error) = data else{
                     return nil
                 }
-                return error.localizedDescription
+                return error.localizedDescription //실패하면 스트링으로 에러를 뱉는다
             }
         
         //네트워크를 통해 가져온 값을 cellData로 변환
         let cellData = blogValue
-            .map{ blog -> [BlogListCellData] in
-                return blog.documetns
-                    .map{ doc in
+            .map{ blog -> [BlogListCellData] in //받아온 blog값을 BlogListCellData로 만든다
+                return blog.documetns //DKBlog의 documents
+                    .map{ doc in //매개변수는 documetns
                         let thumbnailURL = URL(string: doc.thumbnail ?? "")
                         return BlogListCellData(thumbnailURL: thumbnailURL, name: doc.name, title: doc.title, detetime: doc.datetime)
                     }
@@ -88,8 +92,8 @@ class MainViewController: UIViewController{
         //cellData와 sortedType 두 옵저버블을 합쳐야한다.
         Observable
             .combineLatest(
-                sortedType,
-                cellData
+                sortedType, //가장 최신의 Type을 받아서
+                cellData //가장 최신의 cellData를 조합해 정렬한다
             ) { type, data -> [BlogListCellData] in
                 switch type {
                 case .title:
@@ -100,7 +104,7 @@ class MainViewController: UIViewController{
                     return data
                 }
             }
-            .bind(to: listView.cellData)
+            .bind(to: listView.cellData) //cellData에 바인드한다
             .disposed(by: disposeBag)
         
         
@@ -125,8 +129,6 @@ class MainViewController: UIViewController{
                 alertSheetForSorting,
                 alertForErrorMessage
             )
-        
-        alertSheetForSorting
             .asSignal(onErrorSignalWith: .empty())
             .flatMapLatest{ alert -> Signal<AlertAction> in
                 let alertController = UIAlertController(title: alert.title, message: alert.message, preferredStyle: alert.style)
