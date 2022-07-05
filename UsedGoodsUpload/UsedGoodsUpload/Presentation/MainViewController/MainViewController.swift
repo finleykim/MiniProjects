@@ -43,8 +43,14 @@ class MainViewController: UIViewController{
         tableView.backgroundColor = .white
         tableView.separatorStyle = .singleLine
         tableView.tableFooterView = UIView() //셀이 끝났을 때 더이상 세퍼레이터가 보이지 않게 푸터뷰를 만든다
-        
+        //index row 0
         tableView.register(TitleTextFieldCell.self, forCellReuseIdentifier: "TitleTextFieldCell")
+        //index row 1
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CategorySelectCell")
+        //index row 2
+        tableView.register(PriceTextFieldCell.self, forCellReuseIdentifier: "PriceTextFieldCell")
+        //index row 3
+        tableView.register(DetailWriteFormCell.self, forCellReuseIdentifier: "DetailWriteFormCell")
     }
     
     private func layout(){

@@ -10,12 +10,15 @@ import RxCocoa
 
 struct CategoryViewModel{
     let disposeBag = DisposeBag()
-    
+    //뷰모델 -> 뷰
     let cellData: Driver<[Category]> //카테고리를 나타낼 데이터를 뷰에 전달한다.
-    let pop: Signal<Void> // Pop이벤트를 인지한다.
+    let pop: Signal<Void> // Pop이벤트를 인지한다. Push는 MainViewContollre뷰모델에서 구현
+    
+    //뷰 -> 뷰모델
     let itemSelected = PublishRelay<Int>() //어떤 카테고리를 선택했는지 row값을 받아낸다.
     
-    let selectedCategory = PublishRelay<Category>() //MainViewController에서 선택된 카테고리를 표시할 수 있도록 전달한다.
+    //뷰모델 -> 외부의 또다른 뷰(MainViewController)
+    let selectedCategory = PublishRelay<Category>() //MainViewController에서 선택된 카테고리를 표시할 수 있도록  Category(Entity)에 전달한다.
     
     init(){ //카테고리 데이터
         let categories = [

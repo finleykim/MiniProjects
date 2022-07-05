@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C525200728742A670088C15B /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C525200628742A670088C15B /* MainModel.swift */; };
+		C56F4D9A2873CA2900BE408A /* PriceTextFieldCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F4D992873CA2900BE408A /* PriceTextFieldCellViewModel.swift */; };
+		C56F4D9C287411F800BE408A /* PriceTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F4D9B287411F800BE408A /* PriceTextFieldCell.swift */; };
+		C56F4D9F28741CAB00BE408A /* DetailWriteFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F4D9E28741CAB00BE408A /* DetailWriteFormCell.swift */; };
+		C56F4DA128741CC500BE408A /* DetailWriteFormCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F4DA028741CC500BE408A /* DetailWriteFormCellViewModel.swift */; };
 		C5ED50F62872916B00CAFE46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5ED50F52872916B00CAFE46 /* AppDelegate.swift */; };
 		C5ED50F82872916B00CAFE46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5ED50F72872916B00CAFE46 /* SceneDelegate.swift */; };
 		C5ED50FF2872916F00CAFE46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5ED50FE2872916F00CAFE46 /* Assets.xcassets */; };
@@ -24,6 +29,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C525200628742A670088C15B /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
+		C56F4D992873CA2900BE408A /* PriceTextFieldCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTextFieldCellViewModel.swift; sourceTree = "<group>"; };
+		C56F4D9B287411F800BE408A /* PriceTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTextFieldCell.swift; sourceTree = "<group>"; };
+		C56F4D9E28741CAB00BE408A /* DetailWriteFormCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWriteFormCell.swift; sourceTree = "<group>"; };
+		C56F4DA028741CC500BE408A /* DetailWriteFormCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWriteFormCellViewModel.swift; sourceTree = "<group>"; };
 		C5ED50F22872916B00CAFE46 /* UsedGoodsUpload.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UsedGoodsUpload.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5ED50F52872916B00CAFE46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5ED50F72872916B00CAFE46 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +63,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C56F4D982873C9F800BE408A /* CategoryViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C5ED511F2872A6A000CAFE46 /* CategoryViewModel.swift */,
+				C5ED51212872AF0F00CAFE46 /* CategoryListViewController.swift */,
+			);
+			path = CategoryViewController;
+			sourceTree = "<group>";
+		};
+		C56F4D9D287412B900BE408A /* PriceTextFieldCell */ = {
+			isa = PBXGroup;
+			children = (
+				C56F4D992873CA2900BE408A /* PriceTextFieldCellViewModel.swift */,
+				C56F4D9B287411F800BE408A /* PriceTextFieldCell.swift */,
+			);
+			path = PriceTextFieldCell;
+			sourceTree = "<group>";
+		};
+		C56F4DA228741CE500BE408A /* DetailWriteFormCell */ = {
+			isa = PBXGroup;
+			children = (
+				C56F4D9E28741CAB00BE408A /* DetailWriteFormCell.swift */,
+				C56F4DA028741CC500BE408A /* DetailWriteFormCellViewModel.swift */,
+			);
+			path = DetailWriteFormCell;
+			sourceTree = "<group>";
+		};
 		C5ED50E92872916B00CAFE46 = {
 			isa = PBXGroup;
 			children = (
@@ -86,11 +123,13 @@
 		C5ED51152872A04400CAFE46 /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
-				C5ED511F2872A6A000CAFE46 /* CategoryViewModel.swift */,
-				C5ED51212872AF0F00CAFE46 /* CategoryListViewController.swift */,
 				C5ED51112872970400CAFE46 /* MainViewController.swift */,
 				C5ED5113287297CC00CAFE46 /* MainViewModel.swift */,
+				C525200628742A670088C15B /* MainModel.swift */,
+				C56F4D982873C9F800BE408A /* CategoryViewController */,
 				C5ED511A2872A0A000CAFE46 /* TitleTextFieldCell */,
+				C56F4D9D287412B900BE408A /* PriceTextFieldCell */,
+				C56F4DA228741CE500BE408A /* DetailWriteFormCell */,
 			);
 			path = MainViewController;
 			sourceTree = "<group>";
@@ -201,12 +240,17 @@
 			files = (
 				C5ED50F62872916B00CAFE46 /* AppDelegate.swift in Sources */,
 				C5ED51192872A09300CAFE46 /* TitleTextFieldCellViewModel.swift in Sources */,
+				C56F4D9A2873CA2900BE408A /* PriceTextFieldCellViewModel.swift in Sources */,
 				C5ED51222872AF0F00CAFE46 /* CategoryListViewController.swift in Sources */,
 				C5ED50F82872916B00CAFE46 /* SceneDelegate.swift in Sources */,
 				C5ED51122872970400CAFE46 /* MainViewController.swift in Sources */,
+				C56F4D9C287411F800BE408A /* PriceTextFieldCell.swift in Sources */,
+				C56F4DA128741CC500BE408A /* DetailWriteFormCellViewModel.swift in Sources */,
 				C5ED51202872A6A000CAFE46 /* CategoryViewModel.swift in Sources */,
 				C5ED51172872A06600CAFE46 /* TitleTextFieldCell.swift in Sources */,
+				C525200728742A670088C15B /* MainModel.swift in Sources */,
 				C5ED5114287297CC00CAFE46 /* MainViewModel.swift in Sources */,
+				C56F4D9F28741CAB00BE408A /* DetailWriteFormCell.swift in Sources */,
 				C5ED511C2872A5FB00CAFE46 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
