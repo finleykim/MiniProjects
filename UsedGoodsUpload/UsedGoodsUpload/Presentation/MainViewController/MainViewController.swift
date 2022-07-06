@@ -27,8 +27,74 @@ class MainViewController: UIViewController{
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func bind(_ viewModel: MainViewModel){
+    func bind(_ viewModel: MainViewModel){ //뷰모델에서 전달받은 cellData, presentAlert, push에 대한 바인드
+        //MARK: ViewModel -> View
+        viewModel.cellData
+            .drive(tableView.rx.items) { tv, row, data in //테이블 로우 데이터로 전달한다.
+                switch row { //로우에따라 보여질 셀이 다 다르기때문에 스위치문을 사용한다
+                case 0:
+                    let cell = tv.dequeueReusableCell(
+                        withIdentifier: "TitleTextFieldCell", //MainViewModel에 각각의 셀을 정의해두었다. ( 그 셀을 dequeueReusable하는것.
+                        for: IndexPath(row: row, section: 0)
+                    ) as! TitleTextFieldCell
+                    cell.selectionStyle = .none
+                    cell.titleInputField.placeholder = data
+                    cell.bind(viewModel.titleTextFieldCellViewModel)
+                    return cell
+                case 1:
+                    let cell = tv.dequeueReusableCell(
+                        withIdentifier: "CategorySelectCell",
+                        for: IndexPath(row: row, section: 0)
+                    )
+                    cell.selectionStyle = .none
+                    cell.textLabel?.text = data
+                    cell.accessoryType = .disclosureIndicator
+                    return cell
+                case 2:
+                    let cell = tv.dequeueReusableCell(
+                        withIdentifier: "PriceTextFieldCell",
+                        for: IndexPath(row: row, section: 0)
+                    ) as! PriceTextFieldCell
+                    cell.selectionStyle = .none
+                    cell.priceInputField.placeholder = data
+                    cell.bind(viewModel.prieTextFieldCellViewModel)
+                    return cell
+                case 3:
+                    let cell = tv.dequeueReusableCell(
+                        withIdentifier: "DetailWriteFormCell",
+                        for: IndexPath(row: row, section: 0)
+                    ) as! DetailWriteFormCell
+                    cell.selectionStyle = .none
+                    cell.contentInputView.text = data
+                    cell.bind(viewModel.detailWriteFormCellViewModel)
+                    return cell
+                default:
+                    fatalError() //또다른 셀이 보여진다면 fataError를 낸다.
+                }
+            }
+            .disposed(by: disposeBag)
         
+        viewModel.presentAlert //뷰모델이 뷰에게 지금알럿을 띄워! 라고하면 emit으로 알럿띄우는 이벤트를 방출한다.
+            .emit(to: self.rx.setAlert) //extension에 만들어둔 알럿셋팅
+            .disposed(by: disposeBag)
+        
+        viewModel.push
+            .drive(onNext: { viewModel in //드라이브의 onNext를 통해 구현한다. 뷰모델을받는다.
+                let viewController = CategoryListViewController()
+                viewController.bind(viewModel)
+                self.show(viewController, sender: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        //MARK: View -> ViewModel
+        tableView.rx.itemSelected //테이블뷰의 셀이 선택되었는지여부
+            .map { $0.row } //로우값전달
+            .bind(to: viewModel.itemSelected)
+            .disposed(by: disposeBag)
+        
+        submitButton.rx.tap //submitButton이 탭되었는지 여부
+            .bind(to: viewModel.submitButtonTapped)
+            .disposed(by: disposeBag)
     }
     
     private func attribute(){
