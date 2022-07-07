@@ -1,4 +1,5 @@
-# ✨MiniProjects
+
+![Header](http://finley.dothome.co.kr/git/MiniProjects.png)   
 기능 단위의 MVP앱 개발 프로젝트입니다.   
 
 ✔️UsedGoodsUpload
