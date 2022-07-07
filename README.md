@@ -172,12 +172,16 @@ https://www.notion.so/FirestoreDatabase-426bbf1ecc034909b6ca5a049c9ca24e
 FireBase를 통하 인증과 로그인흐름에 대해 학습하였습니다.   
 ##### #FireBase #OAuth   
 - 개발일지   
-
+   - 프리뷰, UI구성   
 https://www.notion.so/Spotify-0be1a23bc744417d8218c7e971a55830   
 https://www.notion.so/Spotify-UI-850ad6bf8541401bb952a901faaf4af0   
+   - Firebase연결   
 https://www.notion.so/Spotify-1-Firebase-a2233806f345479095f43a1cd248f5d7   
+   - 이메일로그인,로그아웃   
 https://www.notion.so/Spotify-2-10006d9c67804a898b9c7156162a56aa   
+   - Google로그인,로그아웃   
 https://www.notion.so/Spotify-3-Google-a25e12801d4d40c291b2aa3cf76b5758   
+   - Apple로그인,로그아웃
 https://www.notion.so/Spotify-3-Apple-f44d37fec0ad48df909ec8311c7d2199   
    
 ✔️COVID19
@@ -186,11 +190,15 @@ https://www.notion.so/Spotify-3-Apple-f44d37fec0ad48df909ec8311c7d2199
 Alamofire를 통해 API 데이터통신을 구현하고,각각의 데이터를 Charts를 통해 파이차트로 표시하였습니다.   
 ##### #Alomofire #Charts   
 - 개발일지
+   - 프리뷰, 데이터수집, UI구성   
 https://www.notion.so/f8468c662b3448ceba1d1cb75de90f02   
 https://www.notion.so/API-debf9f181f1b43d7a26075c2878629e6   
 https://www.notion.so/UI-632a616d3c3140888674e1bccae8e819   
+   - Alamofire API, completionHandler   
 https://www.notion.so/1-Alamofire-API-completionHandler-468a46aa15b74ddc9d93e271218a9534   
+   - 파이차트   
 https://www.notion.so/2-7253c93984cc47d0a1f83e1e0634cde3   
+   - 데이터전달화면이동, loadingindicate   
 https://www.notion.so/3-loadingindicate-89537b4ba96040a18772e13731065813   
 
 ✔️Weather
