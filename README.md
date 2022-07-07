@@ -31,7 +31,9 @@ https://www.notion.so/4-MVVM-6ab9012ad040437c97efd512ae37ef2b
 특정 유저의 깃헙 정보를 열람할 수 있는 페이지 구현 프로젝트입니다.   
 ##### #Rx(RxSwift/RxCocoa) #깃헙API #SnapKit #CodeBase설계      
 - 개발일지   
-https://www.notion.so/GitHub-1-UI-23b88bd935ac437485e2e3b390f30a81
+   - UI구성
+https://www.notion.so/GitHub-1-UI-23b88bd935ac437485e2e3b390f30a81   
+   - RxSwift로 API네트워크통신   
 https://www.notion.so/GitHub-2-RxSwift-API-1c36c79091954bc3a7998611c7bb1934
    
 ✔️Instagram
@@ -40,19 +42,25 @@ Instaram앱 클론 코딩 프로젝트입니다.
 피드화면, 게시물등록화면, 프로필화면 및 사진등록, 공유기능 등을 구현하였습니다.   
 ##### #UIActivityViewController #UIImagePickerController #SnapKit #CodeBase설계   
 - 개발일지   
+   - UI구성(피드뷰,프로필뷰)   
 https://www.notion.so/1-UI-8a20c884dbaf484c8806fcd76e2080df   
 https://www.notion.so/2-UI-658ae6fe159c4faabda01a5d8848f118   
+   - 게시글 작성화면   
 https://www.notion.so/3-c99343fbc7144b4e977815c36ee214bc    
 
 ✔️SubwayStation
 ------------
 지하철 도착정보 앱제작 프로젝트입니다. 클로저를 통한 비동기처리 방식으로 구현하였습니다.   
 ##### #Alamofire #비동기 #서울열린데이터광장API #자동완성검색 #Snapkit #CodeBase설계   
-- 개발일지   
+- 개발일지  
+   - SearchViewController   
 https://www.notion.so/1-SearchViewController-87cbe6bba08c4dfba9f656b69cb84153   
-https://www.notion.so/2-CollectionView-CustomCell-RefreshControl-ae7b0187a28b4464983ef3e8952187a8
+   - CollectionView, CustomCell, RefreshControl   
+https://www.notion.so/2-CollectionView-CustomCell-RefreshControl-ae7b0187a28b4464983ef3e8952187a8   
+   - 통신   
 https://www.notion.so/3-0ba508c84ba54480b785296ea53b34f4   
-https://www.notion.so/4-53753347b6db4f6a8d36e2ab0b3e4f50  
+   - 검색, 자동완성, 결과표시   
+https://www.notion.so/4-53753347b6db4f6a8d36e2ab0b3e4f50   
 
 ✔️AppStrore
 ------------
@@ -61,9 +69,13 @@ AppStore앱 클론 코딩 프로젝트입니다.
 각각의 섹션이 스크롤되도록 하였습니다.
 ##### #UITapBarController #UIActivityViewController #plist데이터연동 #Snapkit #CodeBase설계   
 - 개발일지   
+   - 탭바, 첫번째 탭 레이아웃   
 https://www.notion.so/1-72f56c715c3e496a9eceeeb7fa1a8a26   
+   - 두번째 탭 레이아웃   
 https://www.notion.so/2-495a09a4ed6349d6b536617a59be5f39   
+   - 상세페이지 구현   
 https://www.notion.so/3-d8a77be2ddbc4b3589c2cb3cc141c4dc   
+   - 데이터 적용   
 https://www.notion.so/4-0f5da27f3b314b61b427ef4f54d7aac3   
 
 ✔️MyAssets
@@ -71,8 +83,11 @@ https://www.notion.so/4-0f5da27f3b314b61b427ef4f54d7aac3
 SwiftUI기술을 활용한 자산관리 앱 프로젝트입니다.   
 ##### #SwiftUI   
 - 개발일지   
+   - UI구성   
 https://www.notion.so/1-UI-8f7bf006a95242089ac8ed4f1ff63ad4   
+   - ObservableObject   
 https://www.notion.so/2-ObservableObject-b3935112cae740f79bbce192732842d7   
+   - 섹션 내 탭생성   
 https://www.notion.so/3-b54d319a2fa242609dc59aef07dc492e   
 
    
@@ -83,8 +98,11 @@ https://www.notion.so/3-b54d319a2fa242609dc59aef07dc492e
 프로젝트르 진행하며 OSI 7Layers에 대해 공부했습니다.   
 ##### #API통신 #Snapkit #CodeBase설계   
 - 개발일지   
+   - API   
 https://www.notion.so/1-API-4d085da6721d4451bf0a20e93cb4fa0b   
+   - UI구성    
 https://www.notion.so/2-UI-ed7700d4a0414c3fa2aa3d989a3907fe   
+   - 기능구현   
 https://www.notion.so/3-a0a5500ae43f4800b3016716d450854f   
    
 ✔️NetflixStyleSampleApp
@@ -94,8 +112,11 @@ https://www.notion.so/3-a0a5500ae43f4800b3016716d450854f
 CompositionalLayout에 대해 공부했습니다.   
 ##### #UICollectionViewCompositionalLayout #SnapKit #CodeBase설계   
 - 개발일지   
+   - 초기설정, 셀만들기   
 https://www.notion.so/Netflix-1-8821ca4daeb145c7a0f5ec83f70726f7   
+   - 셀만들기    
 https://www.notion.so/Netflix-2-618d8c1cec004893b08fba47351f8aa5   
+   - 섹션만들기   
 https://www.notion.so/Netflix-3-e663c448a9c2410fb7e4ef25838f0ed9   
    
 ✔️Drink
@@ -105,8 +126,11 @@ UIDatePicker를 통해 알람시간을 정해두면 해당시간에 푸쉬알림
 NotificationCetner의 알림,소리,뱃지 기능과 위치기반, 날짜기반, 시간간격기반의 푸쉬알림에 대해 학습했습니다.   
 ##### #NotificationCenter #RemoteNotification   
 - 개발일지   
+   - UI구성   
 https://www.notion.so/UI-1-51c21e2a5c7046c682abe2e01c891384   
+   - UserDefaults   
 https://www.notion.so/UI-2-UserDefaults-593b6eb089ef40679a8bbad5e2f1202c   
+   - Local Notificationcenterscene   
 https://www.notion.so/10-Local-Notificationcenterscene-d307be2aad974c00aaed98ac7f8e837f   
 
 ✔️Notice
@@ -115,8 +139,11 @@ https://www.notion.so/10-Local-Notificationcenterscene-d307be2aad974c00aaed98ac7
 FireBase의 A/B Testing을 통한 Remote Config와 사용자분석에 대해 학습했습니다.   
 ##### #FireBase #A/BTesting   
 - 개발일지   
+   - UI구성   
 https://www.notion.so/UI-9a778e20040a4858a2d59d68e832e63f   
+   - RemoteConfig setting   
 https://www.notion.so/1-RemoteConfig-setting-44cfb14de37142219ef94896343d1d27   
+   - RemoteConfig A/B Test   
 https://www.notion.so/2-RemoteConfig-A-B-Test-9ec2dd627bce438f8c76130f7dea0c46   
 
 ✔️CreditCardList
@@ -125,12 +152,18 @@ https://www.notion.so/2-RemoteConfig-A-B-Test-9ec2dd627bce438f8c76130f7dea0c46
 Cloud Firestore를 통해 직접 데이터베이스를 구현하여 제작하였고, Realtime DataBase와 Cloud FireStore의 차이점에 대해 학습했습니다.   
 nib파일로 셀을 구성하고 TableView에 적용하고, 상세화면에는 kinfisher를 통해 애니메이션 이미지를 삽입하였습니다.
 ##### #FireStore #ReatimeDataBase #CloudFireStore #KingFisher #xnib #SnapKit #CodeBase설계   
-- 개발일지   
+- 개발일지 
+   - 프리뷰     
 https://www.notion.so/7ee5f5107a0e410298cc299fe2ea9623   
+   - UI구성   
 https://www.notion.so/UI-050b1b40da9f431d8eaff280e8ea0a75   
+   - Firebase Database연결   
 https://www.notion.so/Firebase-Database-30f4dc674a9c4d8a94860dd5663a5bb6   
+   - Realtime Database 수정,삭제   
 https://www.notion.so/Realtime-Database-39866c64884344a39794e30c57e3e7f6   
+   - Firestore Database연결하기   
 https://www.notion.so/Firestore-Database-a810deec58364e689b01ea555e670198   
+   - FirestoreDatabase 수정, 삭제   
 https://www.notion.so/FirestoreDatabase-426bbf1ecc034909b6ca5a049c9ca24e   
 
 ✔️SpotifyLoginSampleApp
@@ -139,6 +172,7 @@ https://www.notion.so/FirestoreDatabase-426bbf1ecc034909b6ca5a049c9ca24e
 FireBase를 통하 인증과 로그인흐름에 대해 학습하였습니다.   
 ##### #FireBase #OAuth   
 - 개발일지   
+
 https://www.notion.so/Spotify-0be1a23bc744417d8218c7e971a55830   
 https://www.notion.so/Spotify-UI-850ad6bf8541401bb952a901faaf4af0   
 https://www.notion.so/Spotify-1-Firebase-a2233806f345479095f43a1cd248f5d7   
