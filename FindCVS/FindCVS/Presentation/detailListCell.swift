@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class detailListCell: UITableViewCell{
+class DetailListCell: UITableViewCell{
     let placeNameLabel = UILabel()
     let addressLabel = UILabel()
     let distanceLabel = UILabel() //중심에서의 거리 표시
