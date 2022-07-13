@@ -32,6 +32,13 @@ class LocationInformationViewController: UIViewController{
         layout()
     }
     private func bind(_ viewModel: LocationInformationViewModel) {
+        viewModel.setMapCenter //뷰모델에서 받은 값으로 map뷰에 센터를 두라는 명령
+            .emit(to: mapView.rx.setMapCenterPoint)
+            .disposed(by: disposdBag)
+        viewModel.errorMessege
+            .emit(to: self.rx.presentAlert)
+            .disposed(by: disposdBag)
+        
         currentLocationButton.rx.tap
             .bind(to: viewModel.currentLocationButtonTapped)
             .disposed(by: disposdBag)
@@ -115,5 +122,29 @@ extension LocationInformationViewController: MTMapViewDelegate{
     //failedUpdatingCurrentLocationWithError: 제대로된 현재위치를 불러오지 못했을 때 에러처리
     func mapView(_ mapView: MTMapView!, failedUpdatingCurrentLocationWithError error: Error!) {
         viewModel.mapViewError.accept(error.localizedDescription)
+    }
+}
+
+extension Reactive where Base : MTMapView{
+    //좌표 센터값이 없을 때를 대비해 setMapCenter를 이쪽으로 이어준다.
+    var setMapCenterPoint: Binder<MTMapPoint> {
+        return Binder(base) { base, point in
+            base.setMapCenter(point, animated: true)
+        }
+    }
+    
+}
+
+extension Reactive where Base: LocationInformationViewController {
+    var presentAlert: Binder<String> {
+        return Binder(base) { base, message in
+            let alertController = UIAlertController(title: "문제가 발생했어요", message: message, preferredStyle: .alert)
+            
+            let action = UIAlertAction(title: "확인", style: .default, handler: nil)
+            
+            alertController.addAction(action)
+            
+            base.present(alertController, animated: true, completion: nil)
+        }
     }
 }
