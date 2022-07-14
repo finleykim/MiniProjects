@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import XCTest
 
 class DetailListCell: UITableViewCell{
     let placeNameLabel = UILabel()
@@ -63,3 +64,6 @@ class DetailListCell: UITableViewCell{
         }
     }
 }
+
+
+
