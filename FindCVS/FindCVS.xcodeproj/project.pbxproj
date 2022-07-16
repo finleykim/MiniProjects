@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		55673F52BF5CAEBD0AA41F38 /* Pods_FindCVS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C71630315FA71E906EB1ED06 /* Pods_FindCVS.framework */; };
 		C51643512882CDDC00270D50 /* LocalNetworkStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51643502882CDDC00270D50 /* LocalNetworkStub.swift */; };
+		C51643532882D63900270D50 /* networkDummy.json in Resources */ = {isa = PBXBuildFile; fileRef = C51643522882D63900270D50 /* networkDummy.json */; };
+		C51643552882D76F00270D50 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51643542882D76F00270D50 /* Dummy.swift */; };
+		C51643592882DA1500270D50 /* LocationInformationModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51643582882DA1500270D50 /* LocationInformationModelTests.swift */; };
 		C51F7D17287D30D300C65107 /* LocationInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51F7D16287D30D300C65107 /* LocationInformationViewController.swift */; };
 		C51F7D1A287D313900C65107 /* LocationInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51F7D19287D313900C65107 /* LocationInformationViewModel.swift */; };
 		C51F7D2A287D45F300C65107 /* MTMapViewError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51F7D29287D45F300C65107 /* MTMapViewError.swift */; };
@@ -54,6 +57,9 @@
 		A28B5BD202DAB62B435C875A /* Pods-FindCVS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindCVS.debug.xcconfig"; path = "Target Support Files/Pods-FindCVS/Pods-FindCVS.debug.xcconfig"; sourceTree = "<group>"; };
 		C51643472882CD5800270D50 /* FindCVSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FindCVSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C51643502882CDDC00270D50 /* LocalNetworkStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNetworkStub.swift; sourceTree = "<group>"; };
+		C51643522882D63900270D50 /* networkDummy.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = networkDummy.json; sourceTree = "<group>"; };
+		C51643542882D76F00270D50 /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
+		C51643582882DA1500270D50 /* LocationInformationModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInformationModelTests.swift; sourceTree = "<group>"; };
 		C51F7D16287D30D300C65107 /* LocationInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInformationViewController.swift; sourceTree = "<group>"; };
 		C51F7D19287D313900C65107 /* LocationInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInformationViewModel.swift; sourceTree = "<group>"; };
 		C51F7D29287D45F300C65107 /* MTMapViewError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTMapViewError.swift; sourceTree = "<group>"; };
@@ -155,7 +161,6 @@
 				3CFFDA9E29AFB1D72A2F497C /* Pods-FindCVSTests.debug.xcconfig */,
 				5DB28EC61E0BB73C72A9D36E /* Pods-FindCVSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -163,6 +168,9 @@
 			isa = PBXGroup;
 			children = (
 				C51643502882CDDC00270D50 /* LocalNetworkStub.swift */,
+				C51643522882D63900270D50 /* networkDummy.json */,
+				C51643542882D76F00270D50 /* Dummy.swift */,
+				C51643582882DA1500270D50 /* LocationInformationModelTests.swift */,
 			);
 			path = FindCVSTests;
 			sourceTree = "<group>";
@@ -405,6 +413,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C51643532882D63900270D50 /* networkDummy.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +514,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C51643552882D76F00270D50 /* Dummy.swift in Sources */,
+				C51643592882DA1500270D50 /* LocationInformationModelTests.swift in Sources */,
 				C51643512882CDDC00270D50 /* LocalNetworkStub.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
