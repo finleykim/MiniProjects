@@ -70,14 +70,7 @@ struct LocationInformationViewModel{
         //뷰에서 뷰모델로 전달된 detailListItemSelected(리스트의 셀을 선택함)이벤트를 받아 이를 제어한다.
         let selectDetailListItem = detailListItemSelected
             .withLatestFrom(documentData) { $1[$0] } //documentData(KLDocument)를 리스트로받아 선택한 row에 해당하는 값을 뽑아 셀에 표시한다.
-            .map { data -> MTMapPoint in  //뽑아낸 데이터를 MTMapPoint로 전환한다
-                guard let longtitue = Double(data.x), //위도경도값은 String으로 전달되기 때문에 Double타입으로 변환한다.
-                      let latitude = Double(data.y) else {
-                    return MTMapPoint() //만약 데이터가 변환되지않거나, 전달되지 않았다면 제로값을 갖는 MTMapPoint를 반환한다.
-                }
-                let geoCoord = MTMapPointGeo(latitude: latitude, longitude: longtitue) //데이터를 받았다면 MTMapPoitnGeo라는 객체로 전환하여
-                return MTMapPoint(geoCoord: geoCoord) //MTMapPoint값으로 반환한다.
-            }
+            .map(model.documentToMTMapPoint)
         
         //현재위치 확인버튼이 눌렸음을 정의
         let moveToCurrentlocation = currentLocationButtonTapped
@@ -86,7 +79,7 @@ struct LocationInformationViewModel{
         
         let currentMapCenter = Observable
             .merge(
-                selectDetailListItem,
+                selectDetailListItem, //디테일 리스트(셀)탭 했을 때
                 currentLocation.take(1),//현위치를 받았을 때 최초 한 번
                 moveToCurrentlocation//현위치 확인버튼이 눌렸을 때
             )

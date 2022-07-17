@@ -18,6 +18,7 @@
 		C523CD68287FBE5A00F26F3F /* LocalAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C523CD67287FBE5A00F26F3F /* LocalAPI.swift */; };
 		C523CD6B287FC1BE00F26F3F /* LocalNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = C523CD6A287FC1BE00F26F3F /* LocalNetwork.swift */; };
 		C523CD6D287FC88700F26F3F /* LocationInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C523CD6C287FC88700F26F3F /* LocationInformationModel.swift */; };
+		C53DB63A2883F65B00C85ADE /* LocationInformationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53DB6392883F65B00C85ADE /* LocationInformationViewModelTests.swift */; };
 		C5457BAE2878150200F7A8BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5457BAD2878150200F7A8BF /* AppDelegate.swift */; };
 		C5457BB02878150200F7A8BF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5457BAF2878150200F7A8BF /* SceneDelegate.swift */; };
 		C5457BB72878150400F7A8BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5457BB62878150400F7A8BF /* Assets.xcassets */; };
@@ -66,6 +67,7 @@
 		C523CD67287FBE5A00F26F3F /* LocalAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAPI.swift; sourceTree = "<group>"; };
 		C523CD6A287FC1BE00F26F3F /* LocalNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNetwork.swift; sourceTree = "<group>"; };
 		C523CD6C287FC88700F26F3F /* LocationInformationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInformationModel.swift; sourceTree = "<group>"; };
+		C53DB6392883F65B00C85ADE /* LocationInformationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInformationViewModelTests.swift; sourceTree = "<group>"; };
 		C5457BAA2878150200F7A8BF /* FindCVS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindCVS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5457BAD2878150200F7A8BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5457BAF2878150200F7A8BF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				C51643522882D63900270D50 /* networkDummy.json */,
 				C51643542882D76F00270D50 /* Dummy.swift */,
 				C51643582882DA1500270D50 /* LocationInformationModelTests.swift */,
+				C53DB6392883F65B00C85ADE /* LocationInformationViewModelTests.swift */,
 			);
 			path = FindCVSTests;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				C51643552882D76F00270D50 /* Dummy.swift in Sources */,
 				C51643592882DA1500270D50 /* LocationInformationModelTests.swift in Sources */,
 				C51643512882CDDC00270D50 /* LocalNetworkStub.swift in Sources */,
+				C53DB63A2883F65B00C85ADE /* LocationInformationViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
