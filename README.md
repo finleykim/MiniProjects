@@ -2,13 +2,18 @@
 ![Header](http://finley.dothome.co.kr/git/MiniProjects.jpg)   
 기능 중심의 앱 개발 프로젝트입니다.   
    
-✔️FindCVS(진행중)   
+✔️FindCVS
 ------------
 카카오 로컬API를 이용한 내 주변 편의점찾기 앱입니다.   
 지도를 통해 내 주변에있는 편의점의 정보를 확인할 수 있습니다.   
 ##### #RxTest #RxBloking #Model테스트 #UnitTest #Nimble   
 - 개발일지   
 [KakaoMap API연결](https://www.notion.so/1-KakaoMap-API-f930daefed0c4d2ea97df2991874d5b3)
+[Entity, MainView](https://www.notion.so/2-Entity-MainView-ViewModel-ac05c9336c2943d5919612dd78afc1b6)
+[detailList](https://www.notion.so/3-detailList-e682c0e8ca8d4ac7ab386a3ba18846b1)
+[API Network](https://www.notion.so/4-API-Network-c4d29e690770473ea61efa15e75abf8d)
+[UnitTest](https://www.notion.so/5-UnitTest-d4a673a297294757a8bf521b59500fa1)
+
 
 ✔️UsedGoodsUpload
 ------------   
