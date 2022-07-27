@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-struct Center: Hashable, Decodable{
+struct Center: Hashable, Decodable {
     let id: Int
     let sido: Sido
     let facilityName: String
@@ -18,12 +18,12 @@ struct Center: Hashable, Decodable{
     let centerType: CenterType
     let phoneNumber: String
     
-    enum CenterType: String, Decodable{
+    enum CenterType: String, Decodable {
         case central = "중앙/권역"
-        case local = "지역 "
+        case local = "지역"
     }
     
-    enum Sido: String, Decodable, CaseIterable, Identifiable{
+    enum Sido: String, Decodable, CaseIterable, Identifiable {
         case 서울특별시
         case 부산광역시
         case 대구광역시
@@ -42,15 +42,16 @@ struct Center: Hashable, Decodable{
         case 경상남도
         case 제주특별자치도
         
-        var id: String{
+        var id: String {
             return self.rawValue
         }
     }
     
-    var coordinate: CLLocationCoordinate2D{
+    var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(
             latitude: CLLocationDegrees(self.lat) ?? .zero,
             longitude: CLLocationDegrees(self.lng) ?? .zero
         )
     }
 }
+

@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct CenterAPIResponse: Decodable{
+struct CenterAPIResponse: Decodable {
     let data: [Center]
 }
