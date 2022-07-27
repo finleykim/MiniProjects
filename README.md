@@ -6,7 +6,9 @@
 ------------   
 각 시도별로 코로나예방접종센터 정보를 조회할 수 있는 앱입니다.   
 ##### #SwiftUI #Combine #MapKit   
-
+- 개발일지   
+[공공 API연결](https://www.notion.so/19-API-73407420a3d54a939b3e5b39acdc5c4c)
+[UI그리기, 기능구현](https://www.notion.so/9-SwiftUI-Combine-db6941b5b97b4737930f19150564d749)   
 
 
 ✔️FindCVS
