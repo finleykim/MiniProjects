@@ -2,11 +2,10 @@
 ![Header](http://finley.dothome.co.kr/git/MiniProjects.jpg)   
 기능 중심의 앱 개발 프로젝트입니다.   
    
-✔️MLKit(진행중)   
+✔️FindCoronaCenter   
 ------------   
-FireBase의 MLKit를 활용해 이미지의 텍스트를 읽어들이는   
-기능을 구현할 앱입니다. 불러들인 텍스트를 음성으로 변환하여 소리로 들을 수 있도록 구현할 계획입니다   
-- 개발일지
+각 시도별로 코로나예방접종센터 정보를 조회할 수 있는 앱입니다.   
+##### #SwiftUI #Combine #MapKit   
 
 
 
