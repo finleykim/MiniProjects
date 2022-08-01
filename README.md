@@ -4,7 +4,7 @@
    
 ✔️StarBucks(진행중)    
 ------------   
-스타벅스 클론 
+스타벅스앱 클론 프로젝트입니다
 ##### #SwiftUI #Combine    
 
 ✔️FindCoronaCenter   
