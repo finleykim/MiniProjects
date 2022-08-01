@@ -48,13 +48,15 @@ class MainTableViewCell: UITableViewCell{
         }
         
         thumbnail.snp.makeConstraints{
-            $0.top.bottom.leading.equalToSuperview()
-            $0.width.equalTo(70)
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.width.equalTo(140)
+            $0.height.equalTo(100)
         }
         
         labelStack.snp.makeConstraints{
-            $0.top.bottom.equalToSuperview().offset(10)
-            $0.leading.equalTo(thumbnail.snp.trailing).inset(20)
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(thumbnail.snp.trailing).offset(20)
             $0.trailing.equalToSuperview()
         }
     }

@@ -26,6 +26,7 @@ class MainViewController: UIViewController{
     
     private func attribute(){
         navigationItem.title = "MVPlayer"
+        view.backgroundColor = .white
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -58,7 +59,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainTableViewCell") as? MainTableViewCell else { return UITableViewCell() }
         cell.thumbnail.image = UIImage(systemName: "music.note")
-        cell.thumbnail.backgroundColor = .blue
+        cell.thumbnail.backgroundColor = .lightGray
         cell.singerName.text = "BTS"
         cell.songTitle.text = "Butter"
         
