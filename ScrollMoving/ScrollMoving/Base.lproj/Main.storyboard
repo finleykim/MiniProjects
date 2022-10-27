@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ScrollMoving" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleAspectFit" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mOg-1H-xPs">
+                                <rect key="frame" x="-25.666666666666657" y="47" width="441.33333333333326" height="763"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="스크린샷 2022-10-19 오후 5.41.59" translatesAutoresizingMaskIntoConstraints="NO" id="xUi-wL-g2W">
+                                        <rect key="frame" x="0.0" y="-58" width="441.33333333333331" height="879"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="xUi-wL-g2W" firstAttribute="centerX" secondItem="mOg-1H-xPs" secondAttribute="centerX" id="8kK-MY-hdb"/>
+                                    <constraint firstItem="xUi-wL-g2W" firstAttribute="centerY" secondItem="mOg-1H-xPs" secondAttribute="centerY" id="AJ5-g4-jdn"/>
+                                    <constraint firstItem="wC2-Jr-jEA" firstAttribute="height" secondItem="xUi-wL-g2W" secondAttribute="height" multiplier="0.868032" id="QQE-Ja-uat"/>
+                                    <constraint firstItem="xUi-wL-g2W" firstAttribute="leading" secondItem="mOg-1H-xPs" secondAttribute="leading" id="X73-37-GcV"/>
+                                    <constraint firstItem="xUi-wL-g2W" firstAttribute="centerX" secondItem="wC2-Jr-jEA" secondAttribute="centerX" id="z0V-ez-rzZ"/>
+                                    <constraint firstItem="xUi-wL-g2W" firstAttribute="centerY" secondItem="wC2-Jr-jEA" secondAttribute="centerY" id="zV2-Oq-i4O"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="wC2-Jr-jEA"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="xt2-9S-xYG"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mOg-1H-xPs" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="kOu-dm-ijv"/>
+                            <constraint firstItem="mOg-1H-xPs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="nPX-mv-iXE"/>
+                            <constraint firstItem="mOg-1H-xPs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oKX-oj-dK8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="myView" destination="xUi-wL-g2W" id="hRJ-sB-vrQ"/>
+                        <outlet property="scrollView" destination="mOg-1H-xPs" id="RLA-sk-NQm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="140" y="3.5545023696682461"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="스크린샷 2022-10-19 오후 5.41.59" width="441" height="879"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
